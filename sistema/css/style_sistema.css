@@ -4,9 +4,10 @@
 	margin: 0;
 	padding: 0;
 	box-sizing: border-box;
+	
 }
 body{
-	background: #ededed;
+	background: #dcdcdc;
 }
 h1, h2, h3, h4, h5, h6 {
     font-family: 'arial';
@@ -38,9 +39,9 @@ p{
 	line-height: 20px;
 }
 a{
-	text-decoration: none;
 	font-family: arial;
 	letter-spacing: 1px;
+	text-decoration: none;
 }
 span {
     font-family: 'GothamBook';
@@ -266,4 +267,84 @@ table td{
 }
 .link_delete{
 	color: #f26b6b;
+}
+
+/*------PAGINADOR-------*/
+
+.paginador ul{
+	padding: 15px;
+	list-style: none;
+	background: #fff;
+	margin-top: 15px;
+	display: flex;
+	justify-content: flex-end;
+}
+.paginador a, .pageSelected{
+	color:#428bca;
+	border: 1px solid #ccc;
+	padding: 5px;
+	display: inline-block;
+	font-size: 14px;
+	text-align: center;
+	width: 35px;
+	
+}
+.paginador a:hover{
+	background: #ccc;
+}
+.pageSelected{
+	color: #fff;
+	background: #428bca;
+	border:  1px solid #428bca;
+}
+
+/*------BUSCADOR-------*/
+.form_search{
+	display: flex;
+	float: right;
+	background: initial;
+	padding: 10px;
+	border-radius: 10px;
+}
+.form_search .btn_search{
+	background: #1faac8;
+	color: #fff;
+	padding: 0 20px;
+	border: 0;
+	cursor: pointer;
+	margin-left: 10px;
+}
+
+/* ---------------ELIMINAR USUARIO --------------*/
+
+.data_delete{
+	text-align: center;
+}
+.data_delete h2{
+	font-size: 12pt;
+}
+.data_delete span{
+	font-weight: bold;
+	color: #4f72d4;
+	font-size: 12pt;
+}
+.btn_cancel,.btn_ok{
+	font-size: 1rem;
+	width: 124px;
+	background: #268d48; /*478ba2*/
+	color: #fff;
+	display: inline-block;
+	padding: 5px;
+	border-radius: 5px;
+	cursor: pointer;
+	margin: 15px;
+}
+.btn_cancel{
+	background: #8d0707;
+}
+.data_delete form{
+	background: initial;
+	margin: auto;
+	padding: 20px 50px;
+	border: 0;
 }

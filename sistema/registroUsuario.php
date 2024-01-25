@@ -2,14 +2,13 @@
     include "../conexion.php";
 
     if(!empty($_POST)){
+
         $alert= "";
 
         if(empty($_POST["nombre"]) || empty($_POST["apellido"]) || empty($_POST["email"]) || empty($_POST["usuario"]) || empty($_POST["clave"]) || empty($_POST["rol"])){
             $alert='<p class="msg_error">Todos los ampos son obligatorios</p>';
         }else{
-            
-    
-            
+                       
             $nombre = $_POST["nombre"];
             $apellido = $_POST["apellido"];
             $email = $_POST["email"];
@@ -24,7 +23,7 @@
                 $alert='<p class="msg_error">El email o usuario ya existen.</p>';
             }else{
                 $query_insert = mysqli_query($conn,"INSERT INTO usuario(nombre,apellido,email,usuario,clave,id_rol) VALUES('$nombre','$apellido','$email','$usuario','$clave','$rol')");
-
+                mysqli_close($conn);
                 if($query_insert){
                     $alert='<p class="msg_save">Usuario creado correctamente!</p>';
                 }else{
@@ -72,12 +71,13 @@
                 <input type="password" name="clave" id="clave" placeholder="Contraseña">
 
                 <label for="rol">Tipo de usuario</label>
+                
                 <?php 
-                    $query_rol = mysqli_query($conn, "SELECT * FROM rol");
-                    $result_rol = mysqli_num_rows($query_rol);
 
+                    $query_rol = mysqli_query($conn, "SELECT * FROM rol");
+                    mysqli_close($conn);
+                    $result_rol = mysqli_num_rows($query_rol);
                     
-                   
                 ?>
 
                 <select name="rol" id="rol">

@@ -6,7 +6,6 @@
         if(empty($_POST["nombre"]) || empty($_POST["apellido"]) || empty($_POST["email"]) || empty($_POST["usuario"]) || empty($_POST["rol"])){
             $alert='<p class="msg_error">Todos los ampos son obligatorios</p>';
         }else{
-            
     
             $id_usuario = $_POST["id_usuario"];
             $nombre = $_POST["nombre"];
@@ -30,7 +29,6 @@
                 }else{
                     $sql_update = mysqli_query($conn, "UPDATE usuario SET nombre = '$nombre', email='$email', usuario='$usuario', clave='$clave', id_rol='$rol' WHERE id_usuario=$id_usuario");
                 }
-
               
                 if($sql_update){
                     $alert='<p class="msg_save">Usuario actualizado correctamente!</p>';
@@ -39,11 +37,13 @@
                 }
             }
         }
+        mysqli_close($conn);
     }
 
-    //Mostrar datos
+    //---------------Mostrar datos
     if(empty($_GET['id'])){
         header('Location: listaUsuario.php');
+        mysqli_close($conn);
     }
 
     $iduser = $_GET['id'];
@@ -53,6 +53,7 @@
                                 on u.id_rol = r.id_rol
                                 WHERE id_usuario = $iduser");
                                 
+    mysqli_close($conn);
     $result_sql = mysqli_num_rows($sql);
     if($result_sql==0){
         header('Location: listaUsuario.php');
@@ -119,12 +120,12 @@
                 <input type="password" name="clave" id="clave" placeholder="Contraseña">
 
                 <label for="rol">Tipo de usuario</label>
+                
                 <?php 
+                    include "../conexion.php";
                     $query_rol = mysqli_query($conn, "SELECT * FROM rol");
-                    $result_rol = mysqli_num_rows($query_rol);
-
-                    
-                   
+                    mysqli_close($conn);
+                    $result_rol = mysqli_num_rows($query_rol);                
                 ?>
 
                 <select name="rol" id="rol" class="notItemOne">

@@ -5,6 +5,7 @@ session_start();
 if(!empty($_SESSION["active"])){
     header("location: sistema/");
 }else{
+
     if(!empty($_POST)){
         if(empty($_POST["usuario"]) || empty($_POST["clave"])){
             $alert="Ingrese su usuario y contraseña ";
@@ -16,6 +17,7 @@ if(!empty($_SESSION["active"])){
 
 
             $query = mysqli_query($conn, "SELECT * FROM `usuario` WHERE usuario='$user' AND clave = '$pass'");
+            mysqli_close($conn);
             $result = mysqli_num_rows(($query));
 
             if($result > 0 ){

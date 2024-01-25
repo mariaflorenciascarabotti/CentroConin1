@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
-	<?php include "includes/scripts.php"; ?>
+	<?php include "includes\scripts.php"; ?>
 	<title>Sisteme Ventas</title>
 </head>
 <body>
