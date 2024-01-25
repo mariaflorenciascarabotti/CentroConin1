@@ -1,6 +1,9 @@
 <nav>
 	<ul>
 		<li><a href="#">Inicio</a></li>
+	<?php 
+		if($_SESSION['id_rol'] == 1){ // con este codigo, lo que hago es que solo vea este campo, el id_rol 1 = administrador
+	?>
 		<li class="principal">
 			<a href="#">Usuarios</a>
 			<ul>
@@ -8,6 +11,7 @@
 				<li><a href="listaUsuario.php">Lista de Usuarios</a></li>
 			</ul>
 		</li>
+	<?php } ?>
 		<li class="principal">
 			<a href="#">Clientes</a>
 			<ul>

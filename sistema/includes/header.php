@@ -13,7 +13,7 @@
 			<div class="optionsBar">
 				<p>Argentina, <?php echo fechaC() ?></p>
 				<span>|</span>
-				<span class="user"><?php echo  $_SESSION["user"] ?></span>
+				<span class="user"><?php echo  $_SESSION["user"] .'-'. $_SESSION["id_rol"] ?></span>
 				
 				<img class="photouser" src="img/user.png" alt="Usuario">
 				<a href="salir.php"><img class="close" src="img/salir.png" alt="Salir del sistema" title="Salir"></a>
