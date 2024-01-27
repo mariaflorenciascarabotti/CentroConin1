@@ -13,10 +13,10 @@
 		</li>
 	<?php } ?>
 		<li class="principal">
-			<a href="#">Clientes</a>
+			<a href="#">Familias</a>
 			<ul>
-				<li><a href="#">Nuevo Cliente</a></li>
-				<li><a href="#">Lista de Clientes</a></li>
+				<li><a href="registroFamilia.php">Nueva Familia</a></li>
+				<li><a href="#">Lista de Familias</a></li>
 			</ul>
 		</li>
 		<li class="principal">

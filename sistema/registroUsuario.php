@@ -11,7 +11,7 @@
         $alert= "";
 
         if(empty($_POST["nombre"]) || empty($_POST["apellido"]) || empty($_POST["email"]) || empty($_POST["usuario"]) || empty($_POST["clave"]) || empty($_POST["rol"])){
-            $alert='<p class="msg_error">Todos los ampos son obligatorios</p>';
+            $alert='<p class="msg_error">Todos los campos son obligatorios</p>';
         }else{
                        
             $nombre = $_POST["nombre"];
@@ -78,7 +78,7 @@
                 <label for="rol">Tipo de usuario</label>
                 
                 <?php 
-
+                    include "../conexion.php";
                     $query_rol = mysqli_query($conn, "SELECT * FROM rol");
                     mysqli_close($conn);
                     $result_rol = mysqli_num_rows($query_rol);
