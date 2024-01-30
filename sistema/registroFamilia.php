@@ -102,8 +102,6 @@
                     
                 ?>   
 
-                <!-- llegue hasta aca -->
-
                 <select name="desnutricion" id="desnutricion">
 
                     <?php 
@@ -117,6 +115,7 @@
                     ?>
                                 
                 </select>
+                
                 <input type="submit" value="Agregar Familia" class="btn_suave">
 
             </form>

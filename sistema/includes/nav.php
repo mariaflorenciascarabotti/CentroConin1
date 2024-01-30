@@ -16,16 +16,10 @@
 			<a href="#">Familias</a>
 			<ul>
 				<li><a href="registroFamilia.php">Nueva Familia</a></li>
-				<li><a href="#">Lista de Familias</a></li>
+				<li><a href="listaFamilia.php">Lista de Familias</a></li>
 			</ul>
 		</li>
-		<li class="principal">
-			<a href="#">Proveedores</a>
-			<ul>
-				<li><a href="#">Nuevo Proveedor</a></li>
-				<li><a href="#">Lista de Proveedores</a></li>
-			</ul>
-		</li>
+		
 		<li class="principal">
 			<a href="#">Productos</a>
 			<ul>
@@ -34,10 +28,10 @@
 			</ul>
 		</li>
 		<li class="principal">
-			<a href="#">Facturas</a>
+			<a href="#">Bolson</a>
 			<ul>
-				<li><a href="#">Nuevo Factura</a></li>
-				<li><a href="#">Facturas</a></li>
+				<li><a href="#">Armar Bolson</a></li>
+				<li><a href="#">Historial Bolsones Entregados</a></li>
 			</ul>
 		</li>
 	</ul>

@@ -7,7 +7,9 @@
     include "../conexion.php";
 
     if(!empty($_POST)){
+
         $alert= "";
+
         if(empty($_POST["nombre"]) || empty($_POST["apellido"]) || empty($_POST["email"]) || empty($_POST["usuario"]) || empty($_POST["rol"])){
             $alert='<p class="msg_error">Todos los ampos son obligatorios</p>';
         }else{
@@ -30,9 +32,9 @@
                 $alert='<p class="msg_error">El email o usuario ya existen.</p>';
             }else{
                 if(empty($_POST['clave'])){
-                    $sql_update = mysqli_query($conn, "UPDATE usuario SET nombre = '$nombre', email='$email', usuario='$usuario', id_rol='$rol' WHERE id_usuario=$id_usuario");
+                    $sql_update = mysqli_query($conn, "UPDATE usuario SET nombre = '$nombre', email='$email', usuario='$usuario', id_rol='$rol' WHERE id_usuario='$id_usuario'");
                 }else{
-                    $sql_update = mysqli_query($conn, "UPDATE usuario SET nombre = '$nombre', email='$email', usuario='$usuario', clave='$clave', id_rol='$rol' WHERE id_usuario=$id_usuario");
+                    $sql_update = mysqli_query($conn, "UPDATE usuario SET nombre = '$nombre', email='$email', usuario='$usuario', clave='$clave', id_rol='$rol' WHERE id_usuario='$id_usuario'");
                 }
               
                 if($sql_update){
@@ -50,9 +52,9 @@
         header('Location: listaUsuario.php');
         mysqli_close($conn);
     }
-
+    include "../conexion.php";
     $iduser = $_GET['id'];
-    $sql = mysqli_query($conn, "SELECT u.id_usuario, u.nombre, u.apellido, u.email, u.usuario, (u.id_rol) as idrol, (r.rol) as rol 
+    $sql = mysqli_query($conn, "SELECT u.id_usuario, u.nombre, u.apellido, u.email, u.usuario, u.clave, (u.id_rol) as idrol, (r.rol) as rol 
                                 FROM usuario u 
                                 INNER JOIN rol r
                                 on u.id_rol = r.id_rol
@@ -71,6 +73,7 @@
             $apellido = $data['apellido'];
             $email = $data['email'];
             $usuario = $data['usuario'];
+            $clave = $data['clave'];
             $idrol = $data['idrol'];
             $rol = $data['rol'];
 
