@@ -1,5 +1,6 @@
 <?php 
     session_start();
+
     if($_SESSION['id_rol'] !=1){
         header("location: ./");
     }
@@ -28,7 +29,9 @@
                 $alert='<p class="msg_error">El email o usuario ya existen.</p>';
             }else{
                 $query_insert = mysqli_query($conn,"INSERT INTO usuario(nombre,apellido,email,usuario,clave,id_rol) VALUES('$nombre','$apellido','$email','$usuario','$clave','$rol')");
+
                 mysqli_close($conn);
+                
                 if($query_insert){
                     $alert='<p class="msg_save">Usuario creado correctamente!</p>';
                 }else{

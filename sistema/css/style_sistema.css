@@ -192,7 +192,7 @@ label{
 	font-family: 'GothamBook';
 	margin: 15px auto 5px auto;
 }
-input, select{
+input, select, textarea{
 	display: block;
 	width: 100%;
 	font-size: 11px;

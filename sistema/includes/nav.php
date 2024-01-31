@@ -23,8 +23,8 @@
 		<li class="principal">
 			<a href="#">Productos</a>
 			<ul>
-				<li><a href="#">Nuevo Producto</a></li>
-				<li><a href="#">Lista de Productos</a></li>
+				<li><a href="registroProducto.php">Nuevo Producto</a></li>
+				<li><a href="listaProducto.php">Lista de Productos</a></li>
 			</ul>
 		</li>
 		<li class="principal">
