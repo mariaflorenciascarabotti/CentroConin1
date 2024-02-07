@@ -141,25 +141,22 @@ $(document).ready(function(){
         }
     });
 
-  /*      // Obtener el elemento del campo de cantidad
-    var cantidadInput = document.getElementById("cant");
-    var cantidad = document.getElementById("cantidad");
+     // Obtener el elemento del campo de cantidad
+     var cantidadInput = document.getElementById("cant");
 
-    // Establecer el límite máximo inicial según el valor de cantidad en PHP
-    cantidadInput.max = cantidad;
-
-    // Agregar un evento de blur para validar la entrada del usuario cuando se sale del campo
-    cantidadInput.addEventListener("blur", function() {
-        var cantidadMaxima = cantidad;
-        var nuevaCantidad = parseInt(cantidadInput.value);
-
-        // Validar si la nueva cantidad supera la cantidad máxima permitida
-        if (nuevaCantidad > cantidadMaxima) {
-            cantidadInput.value = ""; // Limpiar el campo de cantidad
-        }
-    });*/
-
-   
+     // Establecer el límite máximo inicial según el valor de cantidad en PHP
+     cantidadInput.max = <?php echo $data["cantidad"]; ?>;
+ 
+     // Agregar un evento de cambio para validar la entrada del usuario
+     cantidadInput.addEventListener("input", function() {
+         var cantidadMaxima = <?php echo $data["cantidad"]; ?>;
+         var nuevaCantidad = parseInt(cantidadInput.value);
+ 
+         // Validar si la nueva cantidad supera la cantidad máxima permitida
+         if (nuevaCantidad > cantidadMaxima) {
+             cantidadInput.value = ""; // Limpiar el campo de cantidad
+         }
+     });
 
 
     // cierra la funcion de linea 1

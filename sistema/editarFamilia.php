@@ -96,7 +96,7 @@
 <head>
 	<meta charset="UTF-8">
 	<?php include "includes/scripts.php"; ?>
-	<title>Editar Familia</title>
+	<title>Editar Tutor</title>
 </head>
 
 <body>
@@ -106,7 +106,7 @@
 	<section id="container">
 		
         <div class="form_register">
-            <h2>Editar Familia</h2>
+            <h2>Editar datos del Tutor</h2>
             <hr>
             <div class="alert"><?php echo isset($alert) ? $alert : '' ; ?></div>
 
@@ -162,7 +162,7 @@
                     ?>
                                 
                 </select>
-                <input type="submit" value="Agregar Familia" class="btn_suave">
+                <input type="submit" value="Actualizar Datos" class="btn_suave">
 
             </form>
             

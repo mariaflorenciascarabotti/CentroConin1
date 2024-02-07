@@ -7,7 +7,7 @@
 
         $alert= "";
 
-        if( empty($_POST["nombre"]) || empty($_POST["marca"]) || empty($_POST["unidad_medida"]) || empty($_POST["lote"]) || empty($_POST["fecha_vencimiento"]) || empty($_POST["cantidad"]) || empty($_POST["alerta_vencimiento"]) || empty($_POST["precio"]) || empty($_POST["tipo_alimenticio"]) ){
+        if( empty($_POST["nombre"]) || empty($_POST["marca"]) || empty($_POST["unidad_medida"]) || empty($_POST["lote"]) || empty($_POST["fecha_vencimiento"]) || empty($_POST["cantidad"])  || empty($_POST["alerta_vencimiento"]) || ($_POST["precio"] === "" || $_POST["precio"] === null) || empty($_POST["tipo_alimenticio"]) ){
             $alert='<p class="msg_error">Todos los campos son obligatorios</p>';
         }else{
 
@@ -74,7 +74,7 @@
                 <input type="text" name="unidad_medida" id="unidad_medida" placeholder="Unidad de medida. Ej: 1kg">
 
                 <label for="lote">Lote</label>
-                <input type="text" name="lote" id="lote" >
+                <input type="text" name="lote" id="lote" placeholder="Código de lote">
 
                 <label for="fecha_vencimiento">Fecha de Vencimiento</label>
                 <input type="date" name="fecha_vencimiento" id="fecha_vencimiento">
@@ -115,8 +115,10 @@
                 <label for="observaciones">Observaciones</label>
                 <input type="text" name="observaciones" id="observaciones">
 
-                
-                <input type="submit" value="Agregar Producto" class="btn_suave">
+                <button type="submit" class="btn_suave">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-lg" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2"/>
+                    </svg> Agregar Producto
+                </button>
 
             </form>
         </div>

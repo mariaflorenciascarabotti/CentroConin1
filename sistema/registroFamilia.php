@@ -12,7 +12,7 @@
 
         $alert= "";
 
-        if(empty($_POST["dni_tutor"]) || empty($_POST["nombre"]) || empty($_POST["apellido"]) || empty($_POST["domicilio"]) || empty($_POST["telefono"]) || empty($_POST["vinculo"]) || empty($_POST["infantes_6"]) || empty($_POST["infantes_mayores"]) || empty($_POST["desnutricion"]) ){
+        if(empty($_POST["dni_tutor"]) || empty($_POST["nombre"]) || empty($_POST["apellido"]) || empty($_POST["domicilio"]) || empty($_POST["telefono"]) || empty($_POST["vinculo"]) || ($_POST["infantes_6"] === "" || $_POST["infantes_6"] === null) || ($_POST["infantes_mayores"] === "" || $_POST["infantes_mayores"] === null) || empty($_POST["desnutricion"]) ){
             $alert='<p class="msg_error">Todos los campos son obligatorios</p>';
         }else{
             
@@ -69,7 +69,7 @@
             <form action="" method="post">
                 
                 <label for="dni_tutor">DNI</label>
-                <input type="number" name="dni_tutor" id="dni_tutor" placeholder="sin puntos">
+                <input type="text" name="dni_tutor" id="dni_tutor" placeholder="sin puntos">
 
                 <label for="nombre">Nombre</label>
                 <input type="text" name="nombre" id="nombre" placeholder="Nombre">
@@ -116,7 +116,10 @@
                                 
                 </select>
                 
-                <input type="submit" value="Agregar Familia" class="btn_suave">
+                <button type="submit" class="btn_suave">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-lg" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2"/>
+                    </svg> Agregar Familia
+                </button>
 
             </form>
         </div>

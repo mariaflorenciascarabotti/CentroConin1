@@ -5,6 +5,12 @@
     }
 
     include "../conexion.php";
+
+    $busqueda = strtolower($_REQUEST['busqueda']);
+    if(empty($busqueda)){
+        header("location: listaFamilia.php");
+        exit;
+    }
 ?>
 
 <!DOCTYPE html>
@@ -19,22 +25,17 @@
 	<?php include "includes/header.php"; ?>
 
 	<section id="container">
-
-    <?php 
-        $busqueda = strtolower($_REQUEST['busqueda']);
-        if(empty($busqueda)){
-            header("location: listaFamilia.php");
-            mysqli_close($conn);
-        }
-    ?>
 		
 		<h2>Lista de Usuarios</h2>
         <a href="registroFamilia.php" class="btn_new">Agregar Familia</a>
 
 <!------------ Buscador -->
         <form action="buscarFamilia.php" method="get" class="form_search">
-            <input type="text" name="busqueda" id="busqueda" placeholder="Buscar" value="<?php echo $busqueda; ?>">
-            <input type="submit" value="Buscar" class="btn_search">
+            <input type="text" name="busqueda" id="busqueda" placeholder="Buscar" value="<?php echo $busqueda; ?>" >
+            <button type="submit" class="btn_search">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16"><path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0"/>
+                </svg> Buscar
+            </button>
         </form>
         
         <table>
@@ -112,7 +113,7 @@
                 while($data = mysqli_fetch_array($query)){
         ?>
                     <tr>
-                    <td><?php echo $data["id_tutor"]; ?></td> 
+                        <td><?php echo $data["id_tutor"]; ?></td> 
                         <td><?php echo $data["nombre_tutor"]; ?></td>
                         <td><?php echo $data["apellido_tutor"]; ?></td>
                         <td><?php echo $data["domicilio"]; ?></td>
