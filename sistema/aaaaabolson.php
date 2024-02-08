@@ -620,3 +620,130 @@ Lo que saque de preodSelecionados
 
 </body>
 </html>
+------------------------------------------------
+
+<?php 
+session_start();
+include "../conexion.php";
+
+// Validar la entrada del usuario
+$dni_tutor = isset($_POST["dni_tutor"]) ? $_POST["dni_tutor"] : null;
+
+if ($dni_tutor && $dni_tutor !== "1") {
+    $query = "SELECT f.id_tutor, f.dni_tutor, f.nombre_tutor, f.apellido_tutor, f.domicilio, f.telefono_tutor, f.vinculo,  f.infantes_hasta6 , f.infantes_mayores6, f.fecha_ingreso,  d.grado_desnutricion, d.tipo_desnutricion FROM familia f INNER JOIN desnutricion d on f.grado_desnutricion = d.grado_desnutricion WHERE dni_tutor = ?";
+    
+    $stmt = mysqli_prepare($conn, $query);
+    mysqli_stmt_bind_param($stmt, "s", $dni_tutor);
+    mysqli_stmt_execute($stmt);
+    $result = mysqli_stmt_get_result($stmt);
+
+    if ($result && mysqli_num_rows($result) > 0) {
+        while ($data = mysqli_fetch_array($result)) {
+            // Mostrar los datos de la familia
+            // Aquí puedes imprimir los datos dentro del HTML o guardarlos en una variable para imprimir más adelante
+        }
+    } else {
+        echo '<p class="msg_error">No se encontraron resultados para el DNI seleccionado.</p>';
+    }
+
+    mysqli_stmt_close($stmt);
+} else {
+    echo '<p class="msg_error">Se debe seleccionar un DNI válido.</p>';
+}
+
+mysqli_close($conn);
+?>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Familia que recibe Bolson</title>
+</head>
+<body>
+    <section id="container">
+        <h2>Familia que recibe Bolson:</h2>
+
+        <form action="" method="post"> 
+            <label for="dni_tutor">DNI</label>
+            <select name="dni_tutor" id="dni_tutor">
+                <option value="1"></option>
+                <?php 
+                    $query_flia = mysqli_query($conn, "SELECT * FROM familia");
+
+                    while ($dni =  mysqli_fetch_array($query_flia)){
+                        echo '<option value="' . $dni["dni_tutor"] . '">' . $dni["dni_tutor"] . '</option>';
+                    }
+                    mysqli_close($conn);
+                ?>
+            </select>
+            <button type="submit" name="submit_bolson" class="btn_suave" style="border-radius: 5px;">Aceptar</button>
+        </form>
+
+        <?php 
+            include "../conexion.php";
+            $nombre_usuario = $_SESSION['user'];
+            $query_usuario = mysqli_query($conn, "SELECT id_usuario FROM usuario WHERE usuario = '$nombre_usuario'");
+            $row_usuario = mysqli_fetch_assoc($query_usuario);
+            $id_usuario = $row_usuario['id_usuario'];
+
+            if(isset($_POST['submit_bolson'])){
+                
+                $seleccion = $_POST["dni_tutor"];
+                $_SESSION['seleccion'] = $_POST["dni_tutor"];
+            
+                if ($seleccion == "1" || $seleccion == "null"){
+                    echo '<p class="msg_error">Se debe designar un Beneficiario</p>';
+                    $_SESSION['seleccion'] = null; // Limpia la selección de tutor en la sesión
+                    
+                }else{
+                    
+                    $dni = $_POST["dni_tutor"];
+
+                    $query2 = mysqli_query($conn,"SELECT id_tutor from familia WHERE dni_tutor = $dni ");
+
+                    $row = mysqli_fetch_assoc($query2);
+                    if ($row) {
+                        $id_tutor = $row['id_tutor'];
+                    } else {
+                        echo '';
+                    }
+
+                    $query = mysqli_query($conn,"SELECT f.id_tutor, f.dni_tutor, f.nombre_tutor, f.apellido_tutor, f.domicilio, f.telefono_tutor, f.vinculo,  f.infantes_hasta6 , f.infantes_mayores6, f.fecha_ingreso,  d.grado_desnutricion, d.tipo_desnutricion FROM familia f INNER JOIN desnutricion d on f.grado_desnutricion = d.grado_desnutricion WHERE dni_tutor = $dni ");
+                    
+                    mysqli_close($conn);
+                    $result = mysqli_num_rows($query);
+
+                    if($result > 0){
+                        while($data = mysqli_fetch_array($query)){
+                    ?>
+                    <table>
+                        <tr>
+                            <th>DNI</th>
+                            <th>Nombre</th>
+                            <th>Apellido</th>
+                            <th>Vinculo</th>
+                            <th>Menores hasta 6 años</th>
+                            <th>Mayores a 6 años</th>
+                            <th>Grado de desnutricion</th>
+                        </tr>
+                        <tr>
+                            <td><?php echo $data["dni_tutor"]; ?></td> 
+                            <td><?php echo $data["nombre_tutor"]; ?></td>
+                            <td><?php echo $data["apellido_tutor"]; ?></td>
+                            <td><?php echo $data["vinculo"]; ?></td>
+                            <td><?php echo $data["infantes_hasta6"]; ?></td>
+                            <td><?php echo $data["infantes_mayores6"]; ?></td>
+                            <td><?php echo $data["tipo_desnutricion"]; ?></td>
+                        </tr>
+                    </table>
+
+        <?php 
+                        }
+                    }
+                }
+            }  
+        ?>   
+    </section>
+</body>
+</html>

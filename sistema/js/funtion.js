@@ -1,4 +1,5 @@
 $(document).ready(function(){
+    console.log('El archivo function.js se está ejecutando correctamente.');
 
     //Buscar tutor
     $('#dni_tutor').keyup(function(e){ 
@@ -141,27 +142,28 @@ $(document).ready(function(){
         }
     });
 
-  /*      // Obtener el elemento del campo de cantidad
-    var cantidadInput = document.getElementById("cant");
-    var cantidad = document.getElementById("cantidad");
+    function toggleCantidadInput(checkbox) {
+        var cantidadInput = $(checkbox).closest('tr').find('input[type="number"]');
+        cantidadInput.prop('disabled', !checkbox.checked);
+        cantidadInput.prop('required', checkbox.checked);
+    }
 
-    // Establecer el límite máximo inicial según el valor de cantidad en PHP
-    cantidadInput.max = cantidad;
-
-    // Agregar un evento de blur para validar la entrada del usuario cuando se sale del campo
-    cantidadInput.addEventListener("blur", function() {
-        var cantidadMaxima = cantidad;
-        var nuevaCantidad = parseInt(cantidadInput.value);
-
-        // Validar si la nueva cantidad supera la cantidad máxima permitida
-        if (nuevaCantidad > cantidadMaxima) {
-            cantidadInput.value = ""; // Limpiar el campo de cantidad
-        }
-    });*/
-
+     // Obtener referencia al botón y al mensaje
+     var submitButton = $('#submitButton');
+     var disabledMessage = $('#disabledMessage');
+ 
+     // Escuchar eventos de hover sobre el botón
+     submitButton.on('mouseenter', function() {
+         // Mostrar el mensaje solo si el botón está deshabilitado
+         if (submitButton.prop('disabled')) {
+             disabledMessage.css('display', 'block');
+         }
+     });
+ 
+     submitButton.on('mouseleave', function() {
+         // Ocultar el mensaje cuando el cursor sale del botón
+         disabledMessage.css('display', 'none');
+     });
+     // Función para validar el formulario antes de enviar
    
-
-
-    // cierra la funcion de linea 1
-
 });

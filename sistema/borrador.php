@@ -25,7 +25,6 @@ include "../conexion.php";
                     <p>Usuario: <?php echo $_SESSION['user'] ?> </p>
                     <p>Fecha de entrega: <?php echo fechaC() ?> </p>
                 </div>
-             
             </div>
         </div>
     </section>
@@ -33,10 +32,10 @@ include "../conexion.php";
  <!--Flia que recibe el bolson -->
     <section id="container">  
         <?php 
-            $seleccion = $_SESSION['seleccion'];
-
-            $query = mysqli_query($conn,"SELECT f.id_tutor, f.dni_tutor, f.nombre_tutor, f.apellido_tutor, f.domicilio, f.telefono_tutor, f.vinculo,  f.infantes_hasta6 , f.infantes_mayores6, f.fecha_ingreso,  d.grado_desnutricion, d.tipo_desnutricion FROM familia f INNER JOIN desnutricion d on f.grado_desnutricion = d.grado_desnutricion WHERE dni_tutor = $seleccion ");
-            
+            $dni = $_SESSION['dni'];
+     
+            $query = mysqli_query($conn,"SELECT f.id_tutor, f.dni_tutor, f.nombre_tutor, f.apellido_tutor, f.domicilio, f.telefono_tutor, f.vinculo,  f.infantes_hasta6 , f.infantes_mayores6, f.fecha_ingreso,  d.grado_desnutricion, d.tipo_desnutricion FROM familia f INNER JOIN desnutricion d on f.grado_desnutricion = d.grado_desnutricion WHERE dni_tutor = $dni ");
+        
             mysqli_close($conn);
             $result = mysqli_num_rows($query);
 
@@ -65,6 +64,8 @@ include "../conexion.php";
             </table>
         <?php 
                 }
+            }else{
+                echo 'No se ha designado un beneficiario';
             }
         ?>  
     </section>
@@ -72,9 +73,8 @@ include "../conexion.php";
  <!-- Listado de productos -->
  
     <section id="container">  
-
         <h2>Lista de productos seleccionados</h2>
-        
+
             <table>
                 <tr>
                     <th>Nombre</th>
@@ -93,30 +93,55 @@ include "../conexion.php";
                 if(!empty($_POST["selected_items"])) {
                     
                     $productosSeleccionados = $_POST["selected_items"];
-                    
+                    $nombre_usuario = $_SESSION['user'];
+                    $query_usuario = mysqli_query($conn, "SELECT id_usuario FROM usuario WHERE usuario = '$nombre_usuario'");
+                    $row_usuario = mysqli_fetch_assoc($query_usuario);
+                    $id_usuario = $row_usuario['id_usuario'];
+
+                    $dni = $_SESSION['dni'];
+                    $query_dni_tutor = mysqli_query($conn, "SELECT id_tutor FROM familia WHERE dni_tutor = '$dni'");
+                    $row_dni_tutor = mysqli_fetch_assoc($query_dni_tutor);
+                    $id_tutor = $row_dni_tutor['id_tutor'];
+
+                    $query_insert_bolson = "INSERT INTO bolson (id_tutor, id_usuario) VALUES ('$id_tutor', '$id_usuario')";
+                    $result_insert_bolson = mysqli_query($conn, $query_insert_bolson);
+            
+                    if($result_insert_bolson) {
+                        $id_bolson = mysqli_insert_id($conn);
+                    } else {
+                        echo "Error al insertar en la tabla bolson: " . mysqli_error($conn);
+                    }
+                    if ($result_insert_bolson) {
                     foreach($productosSeleccionados as $idProducto) { 
                         
                         $cantidadInputName = "cant_" . $idProducto;
                         $cantidad = $_POST[$cantidadInputName][0];
 
-                  /*      if(isset($_POST['confirmar'])){
-                            // Restar la cantidad seleccionada de la cantidad en la tabla producto
-                            $restarCantidadQuery = "UPDATE producto SET cantidad = (cantidad - $cantidad) WHERE id_prod = $idProducto";
-                            $resultadoResta = mysqli_query($conn, $restarCantidadQuery);
+                        // Resto la cantidad elegida para actualizar el stock disponible
+                        $restarCantidadQuery = "UPDATE producto SET cantidad = (cantidad - $cantidad) WHERE id_prod = $idProducto";
+                        $resultadoResta = mysqli_query($conn, $restarCantidadQuery);
 
-                            if(!$resultadoResta) {
-                                echo "Error al restar la cantidad del producto con ID: $idProducto";
-                                // Puedes decidir cómo manejar este error, ya sea detener el proceso, registrar el error, etc.
-                            }
-                        }*/
-                        
+                        if(!$resultadoResta) {
+                            echo "Error al restar la cantidad del producto con ID: $idProducto";
+                        }
+                        // -------------
+
                         $queryProducto = mysqli_query($conn, "SELECT p.nombre, p.marca, p.unidad_medida, p.lote, p.fecha_vencimiento, p.cantidad, p.observaciones, a.tipo_alimenticio FROM producto p INNER JOIN alimentos a ON p.grupo_alimenticio = a.grupo_alimenticio WHERE p.id_prod = $idProducto");
-                        
+
+                        $query_insert_prod = "INSERT INTO prod_selecionados (id_bolson, id_prod, cantidad_selec) VALUES ('$id_bolson', '$idProducto', '$cantidad')";
+
+                        $result_insert_prod = mysqli_query($conn, $query_insert_prod);
+            
+                        if($result_insert_prod) {
+                            echo "Los datos se han insertado correctamente en ambas tablas.";
+                        } else {
+                            echo "Error al insertar en la tabla prod_selecionados: " . mysqli_error($conn);
+                        }
+                      
                         if($queryProducto) {
                     
                             $producto = mysqli_fetch_assoc($queryProducto);
             ?>
-
                 <tr>
                     <td><?php echo $producto["nombre"]; ?></td> 
                     <td><?php echo $producto["marca"]; ?></td>
@@ -127,51 +152,24 @@ include "../conexion.php";
                     <td><?php echo $producto["observaciones"]; ?></td>   
                     <td><?php echo $cantidad; ?></td>   
                 </tr>
-
-            <?php 
+           
+          <?php 
                         } else {
                             echo "Error al obtener los detalles del producto con ID: $idProducto";
-                        }
+                        } 
                     }
-                    if(isset($_POST['confirmar'])){
-                        // Obtener los valores de cantidad e idProducto
-                        $cantidad = $_POST['cantidad']; // Asegúrate de que el nombre del campo en el formulario sea 'cantidad'
-                        $idProducto = $_POST['id_producto']; // Asegúrate de que el nombre del campo en el formulario sea 'id_producto'
-                    
-                        // Depuración: Imprimir los valores para verificar
-                        echo "Cantidad: $cantidad, ID Producto: $idProducto";
-                    
-                        // Restar la cantidad seleccionada de la cantidad en la tabla producto
-                        $restarCantidadQuery = "UPDATE producto SET cantidad = (cantidad - $cantidad) WHERE id_prod = $idProducto";
-                        $resultadoResta = mysqli_query($conn, $restarCantidadQuery);
-                    
-                        // Verificar si la consulta se ejecutó correctamente
-                        if($resultadoResta) {
-                            echo "La cantidad del producto con ID $idProducto se ha actualizado correctamente.";
-                        } else {
-                            echo "Error al restar la cantidad del producto con ID: $idProducto: " . mysqli_error($conn);
-                            // Puedes decidir cómo manejar este error, ya sea detener el proceso, registrar el error, etc.
-                        }  
-                    }
-                    
                 } else {
                     echo "No se han seleccionado productos.";
                 }  
+            }
                 
             ?>
-            
-            </table>
-      
-            <button type="submit" name="confirmar">Confirmar</button>
-       
-        
 
+            </table>
     </section>
-   
-    
-      
 
     <?php include "includes/footer.php"; ?>
 
 </body>
 </html>
+

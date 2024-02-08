@@ -1,4 +1,5 @@
 $(document).ready(function(){
+    console.log('El archivo function.js se está ejecutando correctamente.');
 
     //Buscar tutor
     $('#dni_tutor').keyup(function(e){ 
@@ -141,24 +142,80 @@ $(document).ready(function(){
         }
     });
 
-     // Obtener el elemento del campo de cantidad
-     var cantidadInput = document.getElementById("cant");
+    //Funcion para que se habilite el campo de cantidad solo a los prod seleccionados
+    $('input[name="selected_items[]"]').on('click', function() {
+        toggleCantidadInput(this);
+    });
 
-     // Establecer el límite máximo inicial según el valor de cantidad en PHP
-     cantidadInput.max = <?php echo $data["cantidad"]; ?>;
- 
-     // Agregar un evento de cambio para validar la entrada del usuario
-     cantidadInput.addEventListener("input", function() {
-         var cantidadMaxima = <?php echo $data["cantidad"]; ?>;
-         var nuevaCantidad = parseInt(cantidadInput.value);
- 
-         // Validar si la nueva cantidad supera la cantidad máxima permitida
-         if (nuevaCantidad > cantidadMaxima) {
-             cantidadInput.value = ""; // Limpiar el campo de cantidad
-         }
-     });
+    function toggleCantidadInput(checkbox) {
+        var cantidadInput = $(checkbox).closest('tr').find('input[type="number"]');
+        cantidadInput.prop('disabled', !checkbox.checked);
+        cantidadInput.prop('required', checkbox.checked);
+    }
+    
+    // muestra mjs del boton de "enviar prod selec" hasta q no ingrese dni tutor
+    var submitButton = $('#submitButton');
+    var disabledMessage = $('#disabledMessage');
+    submitButton.on('mouseenter', function() {
+        if (submitButton.prop('disabled')) {
+            disabledMessage.css('display', 'block');
+        }
+    });
+    submitButton.on('mouseleave', function() {
+        disabledMessage.css('display', 'none');
+    });
 
 
-    // cierra la funcion de linea 1
+    // Función para validar el formulario antes de enviar
+    $('#submitButton').on('click', function(event) {
+        if (!validarFormulario()) {
+            event.preventDefault();
+        }
+    });
+    function validarFormulario() {
+        var checkboxes = $('input[name="selected_items[]"]');
+        var cantidadInputs = $('input[type="number"]');
+        var alMenosUnoSeleccionado = false;
+    
+        // Verificar si al menos un checkbox está marcado
+        checkboxes.each(function() {
+            if ($(this).is(':checked')) {
+                alMenosUnoSeleccionado = true;
+                return false; // Salir del bucle each
+            }
+        });
+    
+        // Verificar si la cantidad correspondiente está habilitada
+        var alMenosUnoConCantidad = false;
+        cantidadInputs.each(function() {
+            if ($(this).is(':disabled')) {
+                return true; // Continuar con el siguiente input
+            }
+            if ($(this).val() > 0) {
+                alMenosUnoConCantidad = true;
+                return false; // Salir del bucle each
+            }
+        });
+    
+        // Comprobar si se cumplen ambas condiciones
+        if (alMenosUnoSeleccionado && alMenosUnoConCantidad) {
+            return true;
+        } else {
+            // Si no se cumplen alguna de las condiciones, mostrar un mensaje de error
+            alert('Por favor, seleccione al menos un producto y especifique su cantidad.');
+            return false; // Evitar el envío del formulario
+        }
+    }
+
+    // Confirmar el envio del formulario
+    $('#submitButton').on('click', function() {
+        if (validarFormulario()) {
+            if (confirm('¿Estás seguro de enviar el formulario?')) {
+                $('#myForm').submit();
+            }else{
+                return false;
+            }
+        }
+    });
 
 });
