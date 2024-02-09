@@ -65,6 +65,8 @@ if(!empty($_SESSION["active"])){
 
             </form>
         </section>
+
+        <img class="img-fundacion" src="img/fundacion-conin-logo-1.png" alt="">
     
 
 </body>

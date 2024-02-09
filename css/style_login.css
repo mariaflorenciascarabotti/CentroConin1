@@ -8,7 +8,7 @@ h3{
     font-size: 1.5rem;
     letter-spacing: 1px;
     width: 100%;
-    background: #3498DB;
+    background: #AD393A;
     padding: 1rem;
     color: #fff;
     text-align: center;
@@ -17,8 +17,8 @@ h3{
 }
 
 #container{
-    background-image: url('../img/Corazonconin.png');
-    background-size: 6rem;
+    background-image: url('../img/Corazonconin1.png');
+    background-size: 8rem;
     width: 100%;
     height: 100vh;
     display: flex;
@@ -29,8 +29,8 @@ h3{
 #container form{
     width: 400px;
     background: #1d1717;
-    padding: 10px;
-    border-radius: 5px;
+    padding: 13px;
+    border-radius: 13px;
 }
 
 #container form input{
@@ -63,4 +63,11 @@ h3{
     text-align: center;
     color: rgb(175, 49, 49);
     font-weight: bold;
+}
+
+.img-fundacion{
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    width: 30%;
 }
