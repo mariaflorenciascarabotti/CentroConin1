@@ -6,7 +6,7 @@
 <head>
 	<meta charset="UTF-8">
 	<?php include "includes\scripts.php"; ?>
-	<title>Sisteme Ventas</title>
+	<title>Centro Conin</title>
 </head>
 <body>
 
@@ -14,7 +14,7 @@
 
 	<section id="container">
 		
-		<h1 class="prueba">Bienvenido al sistema</h1>
+		<h2 class="prueba">Bienvenido al sistema</h2>
 
 	</section>
 

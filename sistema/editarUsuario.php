@@ -104,12 +104,12 @@
 	<section id="container">
 		
         <div class="form_register">
-            <h2>Editar Usuario</h2>
-            <hr>
+           
             <div class="alert"><?php echo isset($alert) ? $alert : '' ; ?></div>
 
             <form action="" method="post">
 
+                <h2>Editar Usuario</h2>
                 <input type="hidden" name="id_usuario" value="<?php echo $id_usuario; ?> ">
 
                 <label for="nombre">Nombre</label>

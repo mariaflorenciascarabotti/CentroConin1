@@ -23,8 +23,11 @@
 
 	<section id="container">
 	
-		<h2>Lista de Productos</h2>
-        <a href="registroProducto.php" class="btn_new">Agregar Producto</a>
+        <h2>Lista de Productos</h2>
+        <a href="registroProducto.php" class="btn_new">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-lg" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2"/>
+            </svg> Agregar Producto
+        </a>
 
 <!------------ Buscador -->
         <form action="buscarProducto.php" method="get" class="form_search">
@@ -42,7 +45,7 @@
                 <th>U. de medida</th>
                 <th>Lote</th>
                 <th>Fecha de vencimiento</th>
-                <th>Cantidad</th>
+                <th>Stock</th>
                 <th>Alerta por vencimiento</th>
                 <th>Precio</th>
                 <th>Grupo alimenticio</th>

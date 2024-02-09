@@ -1,143 +1,102 @@
-@import url(../fonts/GothamBook.css);
-@import url(../fonts/GothamBold.css);
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
 *{
 	margin: 0;
 	padding: 0;
 	box-sizing: border-box;
-	
+	font-family: "Poppins", sans-serif;
+	text-transform: capitalize;
 }
 body{
-	background: #dcdcdc;
+	background: #ffffff;
 }
-h1, h2, h3, h4, h5, h6 {
-    font-family: 'arial';
-    font-weight: bold;
-    letter-spacing: 1px;
-}
-h1{
-	font-size: 26px;
-}
-h2{
-	font-size: 20px;
-}
-h3{
-	font-size: 18px;
-}
-h4{
-	font-size: 16px;
-}
-h5{
-	font-size: 14px;
-}
-h6{
-	font-size: 12px;
-}
-p{
-	font-family: 'arial';
-	letter-spacing: 2px;
-	font-size: 14px;
-	line-height: 20px;
-}
-a{
-	font-family: arial;
-	letter-spacing: 1px;
+body a{
 	text-decoration: none;
 }
-span {
-    font-family: 'GothamBook';
-    letter-spacing: 1px;
-    font-size: 14px;
-    line-height: 20px;
-}
+
+/*------------- Sobre header.php -----------*/
 header{
 	position: fixed;
 	width: 100%;
 }
 .header{
 	color: #FFF;
-	background: #0a4661;
-	height: 35px;
-	display: -webkit-flex;
-	display: -moz-flex;
-	display: -ms-flex;
-	display: -o-flex;
+	background: #AE280F;
+	height: 2rem;
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
 	padding: 10px;
+	
+}
+.header h1 {
+	font-size: 1.5rem;
+}
+.header h1 span{
+	color: #E17B26;
+	font-weight: bold;
 }
 .optionsBar{
-    display: -webkit-flex;
-    display: -moz-flex;
-    display: -ms-flex;
-    display: -o-flex;
     display: flex;
     justify-content: center;
     align-items: center;
 }
+
 .optionsBar span {
-    color: #FFF;
-    font-size: 11pt;
-    font-family: 'GothamBook';
-    text-transform: uppercase;
-    margin-left: 30px;
+    margin: 0 30px;
 }
-.photouser {
-    margin-left: 30px;
-    width: 25px;
-    height: 25px;
+.user{
+	display: flex;
+    justify-content: center;
+    align-items: center;
+	gap: 1rem;
+	text-transform: uppercase;
 }
 .close{
 	width: 25px;
     height: 25px;
 }
 .optionsBar a {
-    display: -webkit-flex;
-    display: -moz-flex;
-    display: -ms-flex;
-    display: -o-flex;
     display: flex;
     margin-left: 30px;
 }
+
+/*------------- Sobre header.php -----------*/
+
 nav ul{
-	background: #058167;
-	/*background: #05817d;*/
+	background: #608235;
 	list-style: none;
-	display: -webkit-flex;
-	display: -moz-flex;
-	display: -ms-flex;
-	display: -o-flex;
 	display: flex;
 	justify-content: left;
 	align-items: center;
+	padding: 0;
 }
+nav li:hover{
+	background: #82af47;
+}
+
 nav ul > li a{
 	position: relative;
+	text-decoration: none;
+	display: flex;
+    gap: 0.5rem;
 }
 nav a{
 	color: #FFF;
 	display: block;
 	font-size: 10pt;
-	font-family: 'GothamBook';
 	padding: 15px 30px;
 	text-transform: uppercase;
 	letter-spacing: 2px;
 	transition: background .5s;
-	border-right: 1px solid #319B8F;
+	
 }
-nav .principal > a{
-    background-position-x: 0%;
-    background-position-y: 0%;
-    background-size: auto auto;
-    background-position: 94% center;
-    background-size: 10px;
-}
+
 nav ul li:hover ul{
 	display: block;
 }
 nav li ul{
-	/*background: #177470;*/
-	background: #2d9872;
+	background: #82af47;
 	display: none;
 	flex-direction: column;
 	position: absolute;
@@ -150,52 +109,52 @@ nav li ul a{
 	border-right: initial;
 }
 nav li ul a:hover{
-	/*background: #2c9595;*/
-	background: #147556;
+	color: black;
+	font-weight: bold;
 }
+
 nav li ul li:last-child{
 	border-radius: 0 0 10px 10px;
 	overflow: hidden;
 }
-
+ 
+/* --------General----------- */
 #container{
-	padding: 90px 15px 15px;
+	padding: 7rem 1rem 1rem 1rem;
+}
+#container1{
+	padding: 10px 15px 15px;
 }
 
 /* ---------------REGISTRO USUARIOS -------------*/
 
 .form_register{
-	width: 450px;
+	width: 480px;
 	margin: auto;
 }
 
 .form_register h2{
-	color: #3c93b0;
+	font-size: 2rem;
+	width: 100%;
+	
 }
 
-hr{
-	border: 0;
-	background: #ccc;
-	height: 1px;
-	margin: 10px 0;
-	display: block;
-}
 form{
-	background: #fff;
-	margin: auto;
-	padding: 20px 50px;
-	border: 1px solid #d1d1d1;
+	background: #cccccc;
+    margin-top: 1rem;
+    padding: 20px 50px;
+    border-radius: 5px;
 }
 label{
 	display: block;
-	font-size: 12pt;
-	font-family: 'GothamBook';
-	margin: 15px auto 5px auto;
+	font-size: 1rem;
+	font-weight: 600;
+	margin: 15px auto 0 auto;
 }
 input, select, textarea{
 	display: block;
 	width: 100%;
-	font-size: 11px;
+	font-size: .75rem;
 	padding: 5px;
 	border: 1px solid #85929e;
 	border-radius: 5px;
@@ -204,45 +163,67 @@ input, select, textarea{
 	display: none;
 }
 .btn_suave{
-	font-size: 12pt;
-	background: #12a4c6;
+	font-size: .85rem;
+	background: #608235;
 	padding: 10px;
 	color: #fff;
 	letter-spacing: 1px;
 	border: 0;
 	cursor: pointer;
-	margin: 15px auto;
-}
-.alert{
+	border-radius: 5px;
 	width: 100%;
-	background: #66e07d66;
-	border-radius: 6px;
-	margin: 20px auto;
+    margin-top: 2rem;
+}
+.btn_suave:hover{
+	background: #425a22;
+	box-shadow: 3px 3px 1px #413e3e
+}
+
+div .alert{
+	width: 100%;
+	position: relative;
+    z-index: -5;
 }
 .msg_error{
 	color: red;
+    font-weight: bold;
+	background: #e1bcbc;
+	border-radius: 8px;
 }
 .msg_save{
-	color: greenyellow;
+	color: rgb(77 157 92);
+	font-weight: bold;
+	background: #cdfd6d;
+    border-radius: 8px;
 }
 .alert p {
-	padding:  10px;
+	text-align: center;
+	margin: 0;
 }
 
 /* ---------------LISTA USUARIO --------------*/
-
 #container h2{
-    font-size: 25px;
+	margin: 0;
     display: inline-block;
-    
+	font-size: 1.8rem;
+	padding-bottom: 1rem;
+}
+#container1 h2{
+	margin: 0;
+    display: inline-block; 
+	font-size: 1.8rem;
+	padding-bottom: 1rem;
 }
 .btn_new{
     display: inline-block;
-    background: #239baa;
+    background: #e0a22f;
     color: #fff;
     padding: 5px 25px;
     border-radius: 4px;
     margin: 20px;
+}
+.btn_new:hover{
+	box-shadow: 3px 3px 1px #635f5f
 }
 table{
 	border-collapse: collapse;
@@ -253,7 +234,7 @@ table{
 table th{
 	text-align: left;
 	padding: 10px;
-	background: #3d7ba8;
+	background: #4f5153;
 	color: #fff;
 }
 table tr:nth-child(odd){
@@ -263,19 +244,21 @@ table td{
 	padding: 10px;
 }
 .link_edit{
-	color: #0ca4ce;
+	color: #0b94b9;
+	font-weight: 600;
 }
 .link_delete{
 	color: #f26b6b;
+	font-weight: 600;
 }
 
-/*------PAGINADOR-------*/
+/*------------------------PAGINADOR-------*/
 
 .paginador ul{
 	padding: 15px;
 	list-style: none;
 	background: #fff;
-	margin-top: 15px;
+	
 	display: flex;
 	justify-content: flex-end;
 }
@@ -287,7 +270,6 @@ table td{
 	font-size: 14px;
 	text-align: center;
 	width: 35px;
-	
 }
 .paginador a:hover{
 	background: #ccc;
@@ -306,6 +288,9 @@ table td{
 	padding: 10px;
 	border-radius: 10px;
 }
+.form_search input{
+	border: none;
+}
 .form_search .btn_search{
 	background: #1faac8;
 	color: #fff;
@@ -320,9 +305,8 @@ table td{
     justify-content: center;
     align-items: center;
     gap: 5px;
-	border-radius: 3px;
+	border-radius: 5px;
 }
-
 
 /* ---------------ELIMINAR USUARIO --------------*/
 
@@ -356,100 +340,15 @@ table td{
 	margin: auto;
 	padding: 20px 50px;
 	border: 0;
+	
 }
 
-/*-----------*/
-/*============ Ventas ============*/
-.datos_cliente, .datos_venta, .title_page{
-	width: 100%;
-	max-width: 900px;
-	margin: auto;
-	margin-bottom: 20px;
-}
-#detalle_venta tr{
-	background-color: #FFF !important;
-}
-#detalle_venta td{
-	border-bottom: 1px solid #CCC;
-}
-.datos{
-	background-color: #e3ecef;
-	display: -webkit-flex;
-	display: -moz-flex;
-	display: -ms-flex;
-	display: -o-flex;
-	display: flex;
-	display: flex;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    border: 2px solid #78909C;
-    padding: 10px;
-    border-radius: 10px;
-    margin-top: 10px;
-}
-.action_cliente{
-	display: -webkit-flex;
-	display: -moz-flex;
-	display: -ms-flex;
-	display: -o-flex;
-	display: flex;
-	align-items: center;
-}
+@media print {
+	/* Ocultar para la impresión */
+	.encabezado, .close, .no-print {
+	  display: none;
+	}
+  }
 
-.datos label{
-	margin: 5px auto;
-}
-.wd20{
-	width: 20%;
-}
-.wd25{
-	width: 25%;
-}
-.wd30{
-	width: 30%;
-}
-.wd40{
-	width: 40%;
-}
-.wd60{
-	width: 60%;
-}
-.wd100{
-	width: 100%;
-}
-#div_registro_cliente, #add_product_venta{
-	display: none;
-}
-.displayN{
-	display: none;
-}
-.tbl_venta{
-	max-width: 900px;
-	margin: auto;
-}
-.tbl_venta tfoot td{
-	font-weight: bold;
-}
-.textright{
-	text-align: right;
-}
-.textcenter{
-	text-align: center;
-}
-.textleft{
-	text-align: left;
-}
-.btn_anular{
-	background-color: #f36a6a;
-	border: 0;
-	border-radius: 5px;
-	cursor: pointer;
-	padding: 10px;
-	margin: 0 3px;
-	color: #FFF;
-}
-
-
-
-
-
+  
+  

@@ -2,7 +2,6 @@
 session_start();
 include "../conexion.php";
 
-
 ?>
 
 <!DOCTYPE html>
@@ -19,18 +18,19 @@ include "../conexion.php";
  <!--Usuario que arma el bolson -->
     <section id="container">
         <div class="datos_usuario_armado">
-            <h4>Datos del usuario</h4>
+            <!-- <h4>Selección de productos a cargo de:</h4> -->
             <div class="datos">
                 <div class="wd50">
-                    <p>Usuario: <?php echo $_SESSION['user'] ?> </p>
-                    <p>Fecha de entrega: <?php echo fechaC() ?> </p>
+                    <!-- <p><span  class="text-decoration-underline">Usuario :</span> <?php echo $_SESSION['user'] ?> </p> -->
+                    <p><span  style="font-weight: bold;">Fecha de entrega: </span><?php echo fechaC() ?> </p>
                 </div>
             </div>
         </div>
     </section>
 
  <!--Flia que recibe el bolson -->
-    <section id="container">  
+    <section id="container1" style="margin-bottom: 1rem;">  
+        <h4>Familia que recibe el bolsón</h4>
         <?php 
             $dni = $_SESSION['dni'];
      
@@ -72,8 +72,8 @@ include "../conexion.php";
 
  <!-- Listado de productos -->
  
-    <section id="container">  
-        <h2>Lista de productos seleccionados</h2>
+    <section id="container1">  
+        <h4>Lista de productos entregados</h4>
 
             <table>
                 <tr>
@@ -111,61 +111,68 @@ include "../conexion.php";
                     } else {
                         echo "Error al insertar en la tabla bolson: " . mysqli_error($conn);
                     }
-                    if ($result_insert_bolson) {
-                    foreach($productosSeleccionados as $idProducto) { 
-                        
-                        $cantidadInputName = "cant_" . $idProducto;
-                        $cantidad = $_POST[$cantidadInputName][0];
-
-                        // Resto la cantidad elegida para actualizar el stock disponible
-                        $restarCantidadQuery = "UPDATE producto SET cantidad = (cantidad - $cantidad) WHERE id_prod = $idProducto";
-                        $resultadoResta = mysqli_query($conn, $restarCantidadQuery);
-
-                        if(!$resultadoResta) {
-                            echo "Error al restar la cantidad del producto con ID: $idProducto";
-                        }
-                        // -------------
-
-                        $queryProducto = mysqli_query($conn, "SELECT p.nombre, p.marca, p.unidad_medida, p.lote, p.fecha_vencimiento, p.cantidad, p.observaciones, a.tipo_alimenticio FROM producto p INNER JOIN alimentos a ON p.grupo_alimenticio = a.grupo_alimenticio WHERE p.id_prod = $idProducto");
-
-                        $query_insert_prod = "INSERT INTO prod_selecionados (id_bolson, id_prod, cantidad_selec) VALUES ('$id_bolson', '$idProducto', '$cantidad')";
-
-                        $result_insert_prod = mysqli_query($conn, $query_insert_prod);
-            
-                        if($result_insert_prod) {
-                            echo "Los datos se han insertado correctamente en ambas tablas.";
-                        } else {
-                            echo "Error al insertar en la tabla prod_selecionados: " . mysqli_error($conn);
-                        }
-                      
-                        if($queryProducto) {
                     
-                            $producto = mysqli_fetch_assoc($queryProducto);
+                    if ($result_insert_bolson) {
+                   
+                        foreach($productosSeleccionados as $idProducto) { 
+                        
+                            $cantidadInputName = "cant_" . $idProducto;
+                            $cantidad = $_POST[$cantidadInputName][0];
+
+                            // Resto la cantidad elegida para actualizar el stock disponible
+                            $restarCantidadQuery = "UPDATE producto SET cantidad = (cantidad - $cantidad) WHERE id_prod = $idProducto";
+                            $resultadoResta = mysqli_query($conn, $restarCantidadQuery);
+
+                            if(!$resultadoResta) {
+                                echo "Error al restar la cantidad del producto con ID: $idProducto";
+                            }
+                            // -------------
+
+                            $queryProducto = mysqli_query($conn, "SELECT p.nombre, p.marca, p.unidad_medida, p.lote, p.fecha_vencimiento, p.cantidad, p.observaciones, a.tipo_alimenticio FROM producto p INNER JOIN alimentos a ON p.grupo_alimenticio = a.grupo_alimenticio WHERE p.id_prod = $idProducto");
+
+                            $query_insert_prod = "INSERT INTO prod_selecionados (id_bolson, id_prod, cantidad_selec) VALUES ('$id_bolson', '$idProducto', '$cantidad')";
+
+                            $result_insert_prod = mysqli_query($conn, $query_insert_prod);
+                
+                            if(!$result_insert_prod) {
+                                echo "Error al insertar en la tabla prod_selecionados: " . mysqli_error($conn);
+                            }
+                        
+                            if($queryProducto) {
+                        
+                                $producto = mysqli_fetch_assoc($queryProducto);
             ?>
                 <tr>
                     <td><?php echo $producto["nombre"]; ?></td> 
                     <td><?php echo $producto["marca"]; ?></td>
                     <td><?php echo $producto["unidad_medida"]; ?></td>
                     <td><?php echo $producto["lote"]; ?></td>
-                    <td><?php echo $producto["fecha_vencimiento"]; ?></td>
+                    <td><?php echo date('d/m/Y', strtotime($producto["fecha_vencimiento"])); ?></td>
+
+                   
                     <td><?php echo $producto["tipo_alimenticio"]; ?></td>
                     <td><?php echo $producto["observaciones"]; ?></td>   
                     <td><?php echo $cantidad; ?></td>   
                 </tr>
            
           <?php 
-                        } else {
-                            echo "Error al obtener los detalles del producto con ID: $idProducto";
-                        } 
-                    }
-                } else {
-                    echo "No se han seleccionado productos.";
-                }  
-            }
+                            } else {
+                                echo "Error al obtener los detalles del producto con ID: $idProducto";
+                            } 
+                        }
+                    } else {
+                        echo "No se han seleccionado productos.";
+                    }  
+                }
                 
             ?>
 
             </table>
+        
+        <div class="d-grid gap-2 d-md-flex justify-content-md-end mt-3 no-print">
+          <button class="btn btn-primary" type="button" onclick="window.print()">Imprimir</button>
+        </div>
+
     </section>
 
     <?php include "includes/footer.php"; ?>

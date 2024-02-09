@@ -11,6 +11,7 @@
         header("location: listaFamilia.php");
         exit;
     }
+   
 ?>
 
 <!DOCTYPE html>
@@ -63,19 +64,20 @@
                 $desnutricion = " OR rol like '%3%' ";
             }
 
+            // Usar $busqueda en la consulta SQL
             $sql_register = mysqli_query($conn, "SELECT COUNT(*) as total_registro FROM familia
-                                                WHERE (
-                                                    id_tutor LIKE '%$busqueda%' OR
-                                                nombre_tutor LIKE '%$busqueda%' OR
-                                                apellido_tutor LIKE '%$busqueda%' OR
-                                                domicilio LIKE '%$busqueda%' OR
-                                                telefono_tutor LIKE '%$busqueda%' OR
-                                                vinculo LIKE '%$busqueda%' OR
-                                                infantes_hasta6 LIKE '%$busqueda%' OR
-                                                infantes_mayores6 LIKE '%$busqueda%' OR
-                                                fecha_ingreso LIKE '%$busqueda%' 
-                                                        $desnutricion)" );
-                                                        
+                                                    WHERE (
+                                                        id_tutor LIKE '%$busqueda%' OR
+                                                        nombre_tutor LIKE '%$busqueda%' OR
+                                                        apellido_tutor LIKE '%$busqueda%' OR
+                                                        domicilio LIKE '%$busqueda%' OR
+                                                        telefono_tutor LIKE '%$busqueda%' OR
+                                                        vinculo LIKE '%$busqueda%' OR
+                                                        infantes_hasta6 LIKE '%$busqueda%' OR
+                                                        infantes_mayores6 LIKE '%$busqueda%' OR
+                                                        fecha_ingreso LIKE '%$busqueda%' 
+                                                                $desnutricion)" );
+
  // --------------------- Paginador
             $result_register = mysqli_fetch_array($sql_register);
             $total_registro = $result_register['total_registro'];
@@ -121,7 +123,7 @@
                         <td><?php echo $data["vinculo"]; ?></td>
                         <td><?php echo $data["infantes_hasta6"]; ?></td>
                         <td><?php echo $data["infantes_mayores6"]; ?></td>
-                        <td><?php echo $data["fecha_ingreso"]; ?></td>
+                        <td><?php echo date('d/m/Y', strtotime($data["fecha_ingreso"])); ?></td>
                         <td><?php echo $data["tipo_desnutricion"]; ?></td>
 
                         <td>

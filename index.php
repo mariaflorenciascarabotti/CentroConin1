@@ -51,22 +51,21 @@ if(!empty($_SESSION["active"])){
 </head>
 <body>
     
-    <section id="container">
+        <section id="container">
 
-        <form action="" method="post">
+            <form action="" method="post">
 
-            <h3>Iniciar Sesión</h3>
-            <!-- <img src="img/logoCorazonConin.png" alt="logoConin" width="40%"> -->
+                <h3>Iniciar Sesión</h3>
+                <input type="text" name="usuario" placeholder="Usuario">
+                <input type="password" name="clave" placeholder="Contraseña">
+                <div class="alert"> 
+                    <?php echo isset($alert) ? $alert : ''; ?> 
+                </div>
+                <input class="btn-ingresar" type="submit" value="ingresar">
 
-            <input type="text" name="usuario" placeholder="Usuario">
-            <input type="password" name="clave" placeholder="Contraseña">
-            <div class="alert"> 
-                <?php echo isset($alert) ? $alert : ''; ?> 
-            </div>
-            <input type="submit" value="ingresar">
-
-        </form>
-    </section>
+            </form>
+        </section>
+    
 
 </body>
 </html>

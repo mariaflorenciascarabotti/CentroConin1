@@ -58,12 +58,11 @@
 	<section id="container">
 		
         <div class="form_register">
-            <h2>Agregar Nuevo Producto</h2>
-            <hr>
+           
             <div class="alert"><?php echo isset($alert) ? $alert : '' ; ?></div>
 
             <form action="" method="post">
-                
+            <h2>Agregar Nuevo Producto</h2>
                 <label for="nombre">Nombre</label>
                 <input type="text" name="nombre" id="nombre" placeholder="Nombre">
 

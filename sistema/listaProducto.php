@@ -37,7 +37,7 @@
                 <th>U. de medida</th>
                 <th>Lote</th>
                 <th>Fecha de vencimiento</th>
-                <th>Cantidad</th>
+                <th>Stock</th>
                 <th>Alerta por vencimiento</th>
                 <th>Precio</th>
                 <th>Grupo alimenticio</th>
@@ -75,10 +75,10 @@
                         <td><?php echo $data["marca"]; ?></td>
                         <td><?php echo $data["unidad_medida"]; ?></td>
                         <td><?php echo $data["lote"]; ?></td>
-                        <td><?php echo $data["fecha_vencimiento"]; ?></td>
+                        <td><?php echo date('d/m/Y', strtotime($data["fecha_vencimiento"])); ?></td>
                         <td><?php echo $data["cantidad"]; ?></td>
-                        <td><?php echo $data["alerta_vencimiento"]; ?></td>
-                        <td><?php echo $data["precio"]; ?></td>
+                        <td><?php echo date('d/m/Y', strtotime($data["alerta_vencimiento"])); ?></td>
+                        <td>$<?php echo $data["precio"]; ?></td>
                         <td><?php echo $data["tipo_alimenticio"]; ?></td>
                         <td><?php echo $data["observaciones"]; ?></td>
                        
@@ -128,18 +128,6 @@
             </ul>
         </div>        
         
-       
-        <!-- <nav aria-label="Page navigation example">
-            <ul class="pagination justify-content-end bg-light">
-                <li class="page-item"><a class="page-link" href="#" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a></li>
-                <li class="page-item"><a class="page-link" href="#">1</a></li>
-                <li class="page-item"><a class="page-link" href="#">2</a></li>
-                <li class="page-item"><a class="page-link" href="#">3</a></li>
-                <li class="page-item"><a class="page-link" href="#" aria-label="Next"><span aria-hidden="true">&raquo;</span></a></li>
-            </ul>
-        </nav> -->
-
-
 	</section>
 
 	<?php include "includes/footer.php"; ?>

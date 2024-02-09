@@ -11,21 +11,45 @@
 	<title>Lista de Productos</title>
 
 <style>
-    /* Estilo para el mensaje */
     #disabledMessage {
-    display: none; /* Comienza oculto */
-    position: absolute; /* Posición absoluta para que esté encima del botón */
+    display: none; 
+    position: absolute; 
     background: #254510;
-    color: white; /* Texto blanco */
-    padding: 10px; /* Espaciado interno */
-    border-radius: 5px; /* Bordes redondeados */
-    pointer-events: none; /* Evita que el mensaje interfiera con los eventos del botón */
+    color: white; 
+    padding: 10px;
+    border-radius: 5px; 
+    pointer-events: none; 
+    }
+    button[disabled] {
+    font-size: .85rem;
+	background: #608235;
+    opacity: 60%;
+	padding: 10px;
+	color: #fff;
+	letter-spacing: 1px;
+	border: 0;
+	cursor: pointer;
+	border-radius: 5px;
+	width: 100%;
+    margin-top: 2rem;
     }
 
-    /* Cuando el usuario pasa el cursor sobre el botón */
-button[disabled]:hover + #disabledMessage {
-    display: block; /* Muestra el mensaje solo cuando el botón está deshabilitado */
-}
+    button[disabled]:hover + #disabledMessage {
+        display: block; 
+    }
+
+    #submitButton:not(:disabled){
+        font-size: .85rem;
+	background: #608235;
+	padding: 10px;
+	color: #fff;
+	letter-spacing: 1px;
+	border: 0;
+	cursor: pointer;
+	border-radius: 5px;
+	width: 100%;
+    margin-top: 2rem;
+    }
 </style>
 
 </head>
@@ -35,9 +59,10 @@ button[disabled]:hover + #disabledMessage {
 
 <!--FLIA qeu recibe el bolson -->
     <section id="container">
-        <h2>Familia que recibirá este bolson</h2>
+        
 
         <form action="" method="post"> 
+        <h2 class="p-0">Familia que recibirá este bolsón</h2><br>
             <label for="dni_tutor">Seleccionar DNI del tutor</label>
             <select name="dni_tutor" id="dni_tutor">
                 <option value="1"></option>
@@ -50,18 +75,14 @@ button[disabled]:hover + #disabledMessage {
                     mysqli_close($conn);
                 ?>
             </select>
-            <button type="submit" name="submit_bolson" class="btn_suave" style="border-radius: 5px;">Aceptar</button>
+            
+            <button type="submit" name="submit_bolson" class="btn_suave"style="border-radius: 5px;">Aceptar</button>
+            
         </form>
 
         <?php 
             include "../conexion.php";
-           
-           /* $nombre_usuario = $_SESSION['user'];
-            $query_usuario = mysqli_query($conn, "SELECT id_usuario FROM usuario WHERE usuario = '$nombre_usuario'");
-            $row_usuario = mysqli_fetch_assoc($query_usuario);
-            $id_usuario = $row_usuario['id_usuario'];*/
-
-      
+        
             $submit_bolson_pressed = false;
 
             if(isset($_POST['submit_bolson'])){
@@ -84,16 +105,7 @@ button[disabled]:hover + #disabledMessage {
                     } else {
                         echo '';
                     }
-                    /*                 
-                    $insert_query = "INSERT INTO bolson (id_usuario, id_tutor) VALUES ('$id_usuario', '$id_tutor')";
-                    $result = mysqli_query($conn, $insert_query);
-                    
-                    if($result) {
-                        echo "El bolson se ha guardado exitosamente.";
-                    } else {
-                        echo "Error al guardar el bolson: " . mysqli_error($conn);
-                    }
-                    */
+                  
                     $query = mysqli_query($conn,"SELECT f.id_tutor, f.dni_tutor, f.nombre_tutor, f.apellido_tutor, f.domicilio, f.telefono_tutor, f.vinculo,  f.infantes_hasta6 , f.infantes_mayores6, f.fecha_ingreso,  d.grado_desnutricion, d.tipo_desnutricion FROM familia f INNER JOIN desnutricion d on f.grado_desnutricion = d.grado_desnutricion WHERE dni_tutor = $dni ");
                     
                     mysqli_close($conn);
@@ -108,9 +120,9 @@ button[disabled]:hover + #disabledMessage {
                             <th>Nombre</th>
                             <th>Apellido</th>
                             <th>Vinculo</th>
-                            <th>Menores hasta 6 años</th>
-                            <th>Mayores a 6 años</th>
-                            <th>Grado de desnutricion</th>
+                            <th>Niños menores hasta 6 años</th>
+                            <th>Niños mayores a 6 años</th>
+                            <th>Grado de desnutrición</th>
                         </tr>
                         <tr>
                             <td><?php echo $data["dni_tutor"]; ?></td> 
@@ -135,19 +147,19 @@ button[disabled]:hover + #disabledMessage {
 	</section>
 
 <!-- Lista de productos -->
-     <section id="container">
+     <section id="container1">
+        
+        <form id="myForm" action="bolsonArmado.php" method="post" >
         <h2>Lista de Productos</h2>
 
-        <form id="myForm" action="borrador.php" method="post" >
-        
             <table>
                 <tr>
                     <th>Nombre</th>
                     <th>Marca</th>
                     <th>U. de medida</th>
-                    <th>Lote</th>
+                    <!-- <th>Lote</th> -->
                     <th>Fecha de vencimiento</th>
-                    <th>Stock</th>    
+                    <th>Stock disponible</th>    
                     <th>Grupo alimenticio</th>
                     <th>Cantidad</th>
                     <th>Seleccionar</th>
@@ -167,8 +179,8 @@ button[disabled]:hover + #disabledMessage {
                         <td><?php echo $data["nombre"]; ?></td> 
                         <td><?php echo $data["marca"]; ?></td>
                         <td><?php echo $data["unidad_medida"]; ?></td>
-                        <td><?php echo $data["lote"]; ?></td>
-                        <td><?php echo $data["fecha_vencimiento"]; ?></td>
+                        <!-- <td><?php echo $data["lote"]; ?></td> -->
+                        <td><?php echo date('d/m/Y', strtotime($data["fecha_vencimiento"])); ?></td>
                         <td><?php echo $data["cantidad"]; ?></td> 
                         <td><?php echo $data["tipo_alimenticio"]; ?></td>
                         <td>

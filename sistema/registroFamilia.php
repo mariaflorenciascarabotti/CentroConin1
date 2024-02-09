@@ -2,10 +2,10 @@
     session_start(); 
 
     // este "if" sirve para que solo lo puede ver quien es administrador (Rol = 1)
-    if($_SESSION['id_rol'] !=1){
+   /* if($_SESSION['id_rol'] !=1){
         header("location: ./");
     }
-
+*/
     include "../conexion.php";
     
     if(!empty($_POST)){
@@ -59,14 +59,15 @@
 	<?php include "includes/header.php"; ?>
 
 	<section id="container">
-		
+    
+          
         <div class="form_register">
-            <h2>Registro de Nueva Familia</h2>
-            <p>Datos sobre el tutor a cargo</p>
-            <hr>
+          
             <div class="alert"><?php echo isset($alert) ? $alert : '' ; ?></div>
 
             <form action="" method="post">
+            <h2>Registro de Nueva Familia</h2>
+            <p class=" m-0">Datos sobre el tutor a cargo</p>
                 
                 <label for="dni_tutor">DNI</label>
                 <input type="text" name="dni_tutor" id="dni_tutor" placeholder="sin puntos">

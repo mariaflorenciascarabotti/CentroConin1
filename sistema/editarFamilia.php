@@ -106,12 +106,12 @@
 	<section id="container">
 		
         <div class="form_register">
-            <h2>Editar datos del Tutor</h2>
-            <hr>
+            
             <div class="alert"><?php echo isset($alert) ? $alert : '' ; ?></div>
 
             <form action="" method="post">
-
+                <h2>Editar datos del Tutor</h2>
+                
                 <input type="hidden" name="id_tutor" value="<?php echo $id_tutor; ?> ">
                 
                 <label for="dni_tutor">DNI</label>

@@ -20,18 +20,17 @@
                 
                 if(!$resultadoResta) {
                     echo "Error al restar la cantidad del producto con ID: $idProducto";
-                    // Puedes decidir cómo manejar este error, ya sea detener el proceso, registrar el error, etc.
+                  
                 }
             }
             
-            // Aquí puedes agregar cualquier otra lógica que necesites después de restar las cantidades
         } else {
             echo "No se han seleccionado productos.";
         }
     } else {
-        // Redireccionar o mostrar un mensaje de error si se intenta acceder a esta página sin enviar el formulario
+        
     }
 
-    // Puedes redirigir al usuario a otra página o mostrar un mensaje de éxito aquí
+   
 ?>
 

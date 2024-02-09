@@ -84,7 +84,7 @@
                         <td><?php echo $data["vinculo"]; ?></td>
                         <td><?php echo $data["infantes_hasta6"]; ?></td>
                         <td><?php echo $data["infantes_mayores6"]; ?></td>
-                        <td><?php echo $data["fecha_ingreso"]; ?></td>
+                        <td><?php echo date('d/m/Y', strtotime( $data["fecha_ingreso"])); ?></td>             
                         <td><?php echo $data["tipo_desnutricion"]; ?></td>
 
                         <td>
