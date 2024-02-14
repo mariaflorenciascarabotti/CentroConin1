@@ -5,7 +5,7 @@
 	padding: 0;
 	box-sizing: border-box;
 	font-family: "Poppins", sans-serif;
-	text-transform: capitalize;
+	text-transform:  full-width;
 }
 body{
 	background: #ffffff;
@@ -61,7 +61,7 @@ header{
     margin-left: 30px;
 }
 
-/*------------- Sobre header.php -----------*/
+/*------------- Sobre nav.php -----------*/
 
 nav ul{
 	background: #608235;
@@ -125,7 +125,10 @@ nav li ul li:last-child{
 #container1{
 	padding: 10px 15px 15px;
 }
-
+/* ---------------IINICIO -------------*/
+.manualUsuario img:hover{
+	transform: scale(1.2);
+}
 /* ---------------REGISTRO USUARIOS -------------*/
 
 .form_register{
@@ -136,7 +139,6 @@ nav li ul li:last-child{
 .form_register h2{
 	font-size: 2rem;
 	width: 100%;
-	
 }
 
 form{
@@ -349,6 +351,3 @@ table td{
 	  display: none;
 	}
   }
-
-  
-  
