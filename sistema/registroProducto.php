@@ -64,7 +64,7 @@
             <form action="" method="post">
             <h2>Agregar Nuevo Producto</h2>
                 <label for="nombre">Nombre</label>
-                <input type="text" name="nombre" id="nombre" placeholder="Nombre">
+                <input type="text" name="nombre" id="nombre_prod" placeholder="Nombre">
 
                 <label for="marca">Marca</label>
                 <input type="text" name="marca" id="marca" placeholder="Marca">

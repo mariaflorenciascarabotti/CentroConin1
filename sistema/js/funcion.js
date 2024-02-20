@@ -219,12 +219,12 @@ $(document).ready(function(){
     });
 
     // validar formulario Solo texto
-    $('input[name="nombre"], input[name="apellido"], input[name="vinculo"]').on('input', function(){
+    $('#nombre, #apellido, #vinculo').on('input', function(){
         validarCamposTexto();
     });
-
+    
     function validarCamposTexto() {
-        var inputs = $('input[name="nombre"], input[name="apellido"], input[name="vinculo"]');
+        var inputs = $('#nombre, #apellido, #vinculo');
         var expresion = /^[a-zA-Z\s]*$/;
     
         inputs.each(function() {
@@ -235,8 +235,7 @@ $(document).ready(function(){
             }
         });
     }
- 
-        
+      
     //Validar DNI  
     $('#dni_tutor').on('blur', function() {
         var dni = $(this).val().trim();
@@ -255,7 +254,8 @@ $(document).ready(function(){
             dniInput.val("");
         } 
     }
-     // validar numeros
+
+     // validar numeros telefonicos
      $('input[name="telefono"]').on('input', function(){
         validarNumeros();
     });
@@ -273,6 +273,41 @@ $(document).ready(function(){
         });
     }
 
+     // validar formulario nombre de Producto
+     $('#nombre_prod').on('input', function(){
+        validarNombreProd();
+    });
+    
+    function validarNombreProd() {
+        var inputs = $('#nombre_prod');
+        var expresion = /^[a-zA-Z]/; // Comienza con una letra
+    
+        inputs.each(function() {
+            var valor = $(this).val();
+            if (valor.trim() !== '' && !expresion.test(valor)) {
+                alert("El nombre del producto debe empezar con una letra");
+                $(this).val(""); // Limpiar el campo si no cumple con la validación
+            }
+        });
+    }
+    
+    // validar formulario marca de Producto
+    $('#marca').on('input', function(){
+        validarMarcaProd();
+    });
+    
+    function validarMarcaProd() {
+        var inputs = $('#marca');
+        var expresion = /^[a-zA-Z]/; // Comienza con una letra
+    
+        inputs.each(function() {
+            var valor = $(this).val();
+            if (valor.trim() !== '' && !expresion.test(valor)) {
+                alert("El nombre del marca debe empezar con una letra");
+                $(this).val(""); // Limpiar el campo si no cumple con la validación
+            }
+        });
+    }
     // validar unidad de medida
     $('#unidad_medida').on('blur', function() {
         var texto = $(this).val().trim();
@@ -292,10 +327,5 @@ $(document).ready(function(){
         }
     }
     
-    
-    
-    
-    
-  
 
 });
