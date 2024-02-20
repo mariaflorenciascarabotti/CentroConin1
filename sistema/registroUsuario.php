@@ -13,8 +13,7 @@
 
         if(empty($_POST["nombre"]) || empty($_POST["apellido"]) || empty($_POST["email"]) || empty($_POST["usuario"]) || empty($_POST["clave"]) || empty($_POST["rol"])){
             $alert='<p class="msg_error">Todos los campos son obligatorios</p>';
-        }else{
-                       
+        }else{   
             $nombre = $_POST["nombre"];
             $apellido = $_POST["apellido"];
             $email = $_POST["email"];
@@ -28,6 +27,7 @@
             if($result > 0 ){
                 $alert='<p class="msg_error">El email o usuario ya existen.</p>';
             }else{
+
                 $query_insert = mysqli_query($conn,"INSERT INTO usuario(nombre,apellido,email,usuario,clave,id_rol) VALUES('$nombre','$apellido','$email','$usuario','$clave','$rol')");
 
                 mysqli_close($conn);

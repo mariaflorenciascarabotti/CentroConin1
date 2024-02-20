@@ -81,7 +81,7 @@
                 <label for="domicilio">Domicilio</label>
                 <input type="text" name="domicilio" id="domicilio" placeholder="Domicilio">
 
-                <label for="telefono">Telefono</label>
+                <label for="telefono">Telefono de contacto</label>
                 <input type="text" name="telefono" id="telefono" placeholder="Sin 0 ni 15">
 
                 <label for="vinculo">Vinculo</label>

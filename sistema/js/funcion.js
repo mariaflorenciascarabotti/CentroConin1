@@ -218,4 +218,84 @@ $(document).ready(function(){
         }
     });
 
+    // validar formulario Solo texto
+    $('input[name="nombre"], input[name="apellido"], input[name="vinculo"]').on('input', function(){
+        validarCamposTexto();
+    });
+
+    function validarCamposTexto() {
+        var inputs = $('input[name="nombre"], input[name="apellido"], input[name="vinculo"]');
+        var expresion = /^[a-zA-Z\s]*$/;
+    
+        inputs.each(function() {
+            var valor = $(this).val();
+            if (!expresion.test(valor)) {
+                alert("Por favor, ingresa solo letras en el campo " + $(this).attr('name'));
+                $(this).val("");
+            }
+        });
+    }
+ 
+        
+    //Validar DNI  
+    $('#dni_tutor').on('blur', function() {
+        var dni = $(this).val().trim();
+        if (dni !== "") {
+            validarDNI(dni);
+        }   
+    });
+    
+    function validarDNI(dni) {
+        var dniInput = $('#dni_tutor');
+        var valor = dniInput.val();
+        var expresion = /^\d{7,8}$/;
+    
+        if ((valor === '0000000') || (!expresion.test(valor))) {
+            alert("Por favor, ingresa un DNI válido");
+            dniInput.val("");
+        } 
+    }
+     // validar numeros
+     $('input[name="telefono"]').on('input', function(){
+        validarNumeros();
+    });
+
+    function validarNumeros() {
+        var inputs = $('input[name="telefono"]');
+        var expresion = /^[a-zA-Z\s]*$/;
+    
+        inputs.each(function() {
+            var valor = $(this).val();
+            if (expresion.test(valor)) {
+                alert("Por favor, ingresa solo números en el campo " + $(this).attr('name'));
+                $(this).val("");
+            }
+        });
+    }
+
+    // validar unidad de medida
+    $('#unidad_medida').on('blur', function() {
+        var texto = $(this).val().trim();
+        if (texto !== "") {
+            validarUnidadMedida(texto);
+        }
+    });
+    
+    function validarUnidadMedida(texto) {
+        var contieneNumero = /\d/.test(texto);
+        var contieneLetra = /[a-zA-Z]/.test(texto);
+        var contieneCaracteresValidos = /^[a-zA-Z0-9\s]*[.,]?[a-zA-Z0-9\s]*$/.test(texto);
+
+        if (!contieneNumero || !contieneLetra || !contieneCaracteresValidos) {
+            alert("La unidad de medida debe contener la cantidad y la unidad de medida. Por ejemplo: 1 kg");
+            $('#unidad_medida').val("");
+        }
+    }
+    
+    
+    
+    
+    
+  
+
 });

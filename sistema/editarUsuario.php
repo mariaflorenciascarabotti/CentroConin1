@@ -32,9 +32,9 @@
                 $alert='<p class="msg_error">El email o usuario ya existen.</p>';
             }else{
                 if(empty($_POST['clave'])){
-                    $sql_update = mysqli_query($conn, "UPDATE usuario SET nombre = '$nombre', email='$email', usuario='$usuario', id_rol='$rol' WHERE id_usuario='$id_usuario'");
+                    $sql_update = mysqli_query($conn, "UPDATE usuario SET nombre = '$nombre', apellido='$apellido', email='$email', usuario='$usuario', id_rol='$rol' WHERE id_usuario='$id_usuario'");
                 }else{
-                    $sql_update = mysqli_query($conn, "UPDATE usuario SET nombre = '$nombre', email='$email', usuario='$usuario', clave='$clave', id_rol='$rol' WHERE id_usuario='$id_usuario'");
+                    $sql_update = mysqli_query($conn, "UPDATE usuario SET nombre = '$nombre', apellido='$apellido', email='$email', usuario='$usuario', clave='$clave', id_rol='$rol' WHERE id_usuario='$id_usuario'");
                 }
               
                 if($sql_update){

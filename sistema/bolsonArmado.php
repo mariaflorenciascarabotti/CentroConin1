@@ -83,7 +83,7 @@ include "../conexion.php";
                     <th>Lote</th>
                     <th>Fecha de vencimiento</th>
                     <th>Grupo alimenticio</th>
-                    <th>Observaciones</th>
+                    <!-- <th>Observaciones</th> -->
                     <th>Cantidad</th>
                 </tr>
 
@@ -151,7 +151,7 @@ include "../conexion.php";
 
                    
                     <td><?php echo $producto["tipo_alimenticio"]; ?></td>
-                    <td><?php echo $producto["observaciones"]; ?></td>   
+                    <!-- <td><?php echo $producto["observaciones"]; ?></td>    -->
                     <td><?php echo $cantidad; ?></td>   
                 </tr>
            
@@ -168,9 +168,10 @@ include "../conexion.php";
             ?>
 
             </table>
-        
-        <div class="d-grid gap-2 d-md-flex justify-content-md-end mt-3 no-print">
-          <button class="btn btn-primary" type="button" onclick="window.print()">Imprimir</button>
+        <div class="noPrint">
+            <div class="noPrint d-grid gap-2 d-md-flex justify-content-md-end mt-3">
+               <button class="btn btn-primary" type="button" onclick="window.print()">Imprimir</button>
+            </div>
         </div>
 
     </section>

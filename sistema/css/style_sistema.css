@@ -347,7 +347,8 @@ table td{
 
 @media print {
 	/* Ocultar para la impresión */
-	.encabezado, .close, .no-print {
+	.encabezado, .close, .noPrint {
 	  display: none;
 	}
   }
+ 
