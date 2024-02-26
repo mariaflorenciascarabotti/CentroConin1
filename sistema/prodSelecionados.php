@@ -157,7 +157,6 @@
                     <th>Nombre</th>
                     <th>Marca</th>
                     <th>U. de medida</th>
-                    <!-- <th>Lote</th> -->
                     <th>Fecha de vencimiento</th>
                     <th>Stock disponible</th>    
                     <th>Grupo alimenticio</th>
@@ -168,7 +167,7 @@
                 <?php 
                 include "../conexion.php";
                 
-                $query = mysqli_query($conn,"SELECT p.id_prod, p.nombre, p.marca, p.unidad_medida, p.lote, p.fecha_vencimiento, p.cantidad, p.alerta_vencimiento, p.precio, p.observaciones, a.grupo_alimenticio, a.tipo_alimenticio FROM producto p INNER JOIN alimentos a on p.grupo_alimenticio = a.grupo_alimenticio  ORDER BY grupo_alimenticio ASC "); 
+                $query = mysqli_query($conn,"SELECT p.id_prod, p.nombre, p.marca, p.unidad_medida, p.fecha_vencimiento, p.cantidad, p.alerta_vencimiento, p.precio, p.observaciones, a.grupo_alimenticio, a.tipo_alimenticio FROM producto p INNER JOIN alimentos a on p.grupo_alimenticio = a.grupo_alimenticio  ORDER BY grupo_alimenticio ASC "); 
                 mysqli_close($conn);
                 $result = mysqli_num_rows($query);
 
@@ -179,16 +178,15 @@
                         <td><?php echo $data["nombre"]; ?></td> 
                         <td><?php echo $data["marca"]; ?></td>
                         <td><?php echo $data["unidad_medida"]; ?></td>
-                        <!-- <td><?php echo $data["lote"]; ?></td> -->
                         <td><?php echo date('d/m/Y', strtotime($data["fecha_vencimiento"])); ?></td>
                         <td><?php echo $data["cantidad"]; ?></td> 
                         <td><?php echo $data["tipo_alimenticio"]; ?></td>
                         <td>
-                            <input type="number" name="cant_<?php echo $data["id_prod"]; ?>[]" min="0" max="<?php echo $data["cantidad"]; ?>" disabled >
+                          <input type="number" name="cant_<?php echo $data["id_prod"]; ?>[]" min="0" max="<?php echo $data["cantidad"]; ?>">
                         </td>
+
                         <td>
                             <input type="checkbox" name="selected_items[]" value="<?php echo $data["id_prod"]; ?>">
- 
                         </td>
                     </tr>
                     <?php 
@@ -204,6 +202,28 @@
     </section>
 
 	<?php include "includes/footer.php"; ?>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            var inputsCantidad = document.querySelectorAll("input[type='number']");
+
+            inputsCantidad.forEach(function(input) {
+                input.addEventListener("input", function() {
+                    var cantidadMaxima = parseInt(input.getAttribute("max"));
+                    var valorIngresado = parseInt(input.value);
+
+                    if (valorIngresado > cantidadMaxima) {
+                        alert ("Lo siento, la cantidad ingresada supera el stock disponible, intente nuevamente")
+                        input.value = "";
+                    } else  if (valorIngresado < 0) {
+                        alert ("Lo siento, no puede ingresar un número en negativo, intente nuevamente")
+                        input.value = "";
+                    }
+                });
+            });
+        });
+    </script>
+
     
 </body>
 </html>

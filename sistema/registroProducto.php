@@ -79,7 +79,7 @@
                 <input type="date" name="fecha_vencimiento" id="fecha_vencimiento">
 
                 <label for="cantidad">Cantidad</label>
-                <input type="number" name="cantidad" id="cantidad" placeholder="Cantidad total de unidades" min="0">
+                <input type="number" name="cantidad" id="cantidad" placeholder="Cantidad total de unidades" min="0" oninput="validarCantidad(this)">
 
                 <label for="alerta_vencimiento">Alerta de Vencimiento</label>
                 <input type="date" name="alerta_vencimiento" id="alerta_vencimiento">
@@ -124,6 +124,15 @@
 	</section>
 
 	<?php include "includes/footer.php"; ?>
+
+    <script>
+        function validarCantidad(input) {
+            if (input.value < 0) {
+                alert ("No se aceptan números negativos, intente nuevamente")
+                input.value = "";
+            }
+        }
+    </script>
 
 </body>
 </html>

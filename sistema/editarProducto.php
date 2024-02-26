@@ -1,4 +1,3 @@
-<!-- empty($_POST["nombre"]) || empty($_POST["marca"]) || empty($_POST["unidad_medida"]) || empty($_POST["fecha_vencimiento"]) || empty($_POST["cantidad"]) || empty($_POST["alerta_vencimiento"]) || empty($_POST["precio"]) || empty($_POST["tipo_alimenticio"]) -->
 <?php 
     session_start();
    
@@ -133,7 +132,7 @@
                 <input type="text" name="fecha_vencimiento" id="fecha_vencimiento" value="<?php echo $fecha_vencimiento; ?> ">
 
                 <label for="cantidad">Cantidad</label>
-                <input type="text" name="cantidad" id="cantidad" value="<?php echo $cantidad; ?> ">
+                <input type="text" name="cantidad" id="cantidad" value="<?php echo $cantidad; ?>" min="0" oninput="validarCantidad(this)">
 
                 <label for="alerta_vencimiento">Alerta de vencimiento</label>
                 <input type="text" name="alerta_vencimiento" id="alerta_vencimiento" value="<?php echo $alerta_vencimiento; ?> ">
@@ -177,6 +176,16 @@
 	</section>
 
 	<?php include "includes/footer.php"; ?>
+
+    <script>
+        function validarCantidad(input) {
+            if (input.value < 0) {
+                alert ("No se aceptan números negativos, intente nuevamente")
+                input.value = "";
+                
+            }
+        }
+    </script>
 
 </body>
 </html>
