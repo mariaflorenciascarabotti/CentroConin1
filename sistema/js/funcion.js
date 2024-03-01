@@ -225,7 +225,7 @@ $(document).ready(function(){
     
     function validarCamposTexto() {
         var inputs = $('#nombre, #apellido, #vinculo');
-        var expresion = /^[a-zA-Z\s]*$/;
+        var expresion = /^[a-zA-ZáéíóúüñÁÉÍÓÚÜÑ\s]*$/;
     
         inputs.each(function() {
             var valor = $(this).val();
@@ -262,7 +262,7 @@ $(document).ready(function(){
 
     function validarNumeros() {
         var inputs = $('input[name="telefono"]');
-        var expresion = /^[a-zA-Z\s]*$/;
+        var expresion = /^[a-zA-ZáéíóúüñÁÉÍÓÚÜÑ\s]*$/;
     
         inputs.each(function() {
             var valor = $(this).val();
@@ -280,7 +280,7 @@ $(document).ready(function(){
     
     function validarNombreProd() {
         var inputs = $('#nombre_prod');
-        var expresion = /^[a-zA-Z]/; // Comienza con una letra
+        var expresion = /^[a-zA-ZáéíóúüñÁÉÍÓÚÜÑ\s]/; // Comienza con una letra
     
         inputs.each(function() {
             var valor = $(this).val();
@@ -298,7 +298,7 @@ $(document).ready(function(){
     
     function validarMarcaProd() {
         var inputs = $('#marca');
-        var expresion = /^[a-zA-Z]/; // Comienza con una letra
+        var expresion = /^[a-zA-ZáéíóúüñÁÉÍÓÚÜÑ\s]/; // Comienza con una letra
     
         inputs.each(function() {
             var valor = $(this).val();
@@ -318,7 +318,7 @@ $(document).ready(function(){
     
     function validarUnidadMedida(texto) {
         var contieneNumero = /\d/.test(texto);
-        var contieneLetra = /[a-zA-Z]/.test(texto);
+        var contieneLetra = /[a-zA-ZáéíóúüñÁÉÍÓÚÜÑ\s]/.test(texto);
         var contieneCaracteresValidos = /^[a-zA-Z0-9\s]*[.,]?[a-zA-Z0-9\s]*$/.test(texto);
 
         if (!contieneNumero || !contieneLetra || !contieneCaracteresValidos) {

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 21-02-2024 a las 00:44:16
+-- Tiempo de generación: 26-02-2024 a las 21:40:33
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -39,7 +39,8 @@ CREATE TABLE `alimentos` (
 INSERT INTO `alimentos` (`grupo_alimenticio`, `tipo_alimenticio`) VALUES
 (1, 'Lacteos'),
 (2, 'Cereales / Legumbre'),
-(3, 'Frutas / Verdura');
+(3, 'Frutas / Verdura'),
+(4, 'Otro');
 
 -- --------------------------------------------------------
 
@@ -65,7 +66,9 @@ INSERT INTO `bolson` (`id_bolson`, `id_tutor`, `id_usuario`, `fecha`) VALUES
 (4, 1, 1, '2024-02-20 18:39:56'),
 (5, 1, 1, '2024-02-20 19:01:57'),
 (6, 1, 1, '2024-02-20 19:03:08'),
-(7, 1, 1, '2024-02-20 19:03:27');
+(7, 1, 1, '2024-02-20 19:03:27'),
+(8, 1, 1, '2024-02-26 16:48:29'),
+(9, 1, 1, '2024-02-26 17:24:40');
 
 -- --------------------------------------------------------
 
@@ -139,7 +142,9 @@ CREATE TABLE `producto` (
 --
 
 INSERT INTO `producto` (`id_prod`, `nombre`, `marca`, `unidad_medida`, `lote`, `fecha_vencimiento`, `cantidad`, `alerta_vencimiento`, `precio`, `grupo_alimenticio`, `observaciones`) VALUES
-(1, 'Harina 0000', 'Blancaflor', '1 kg', 'MC44148', '2024-05-22', 17, '2024-05-02', 0, 2, '');
+(1, 'Harina 0000        ', 'Blancaflor        ', '1 kg      ', 'MC44148', '2024-05-22', 26, '2024-05-02', 0, 2, ''),
+(2, 'leche    ', 'sancor    ', '1 ltr    ', '541lo', '2024-10-10', 15, '2024-09-10', 850, 1, ''),
+(3, 'mermelada', 'marolio', '250gr', '456lp', '2024-10-20', 36, '2024-09-10', 500, 3, '');
 
 -- --------------------------------------------------------
 
@@ -165,7 +170,9 @@ INSERT INTO `prod_selecionados` (`id_selec`, `id_bolson`, `id_prod`, `cantidad_s
 (4, 4, 1, 1),
 (5, 5, 1, 1),
 (6, 6, 1, 1),
-(7, 7, 1, 1);
+(7, 7, 1, 1),
+(8, 8, 1, 18),
+(9, 9, 2, 21);
 
 -- --------------------------------------------------------
 
@@ -280,13 +287,13 @@ ALTER TABLE `usuario`
 -- AUTO_INCREMENT de la tabla `alimentos`
 --
 ALTER TABLE `alimentos`
-  MODIFY `grupo_alimenticio` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `grupo_alimenticio` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT de la tabla `bolson`
 --
 ALTER TABLE `bolson`
-  MODIFY `id_bolson` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id_bolson` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT de la tabla `desnutricion`
@@ -304,13 +311,13 @@ ALTER TABLE `familia`
 -- AUTO_INCREMENT de la tabla `producto`
 --
 ALTER TABLE `producto`
-  MODIFY `id_prod` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id_prod` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de la tabla `prod_selecionados`
 --
 ALTER TABLE `prod_selecionados`
-  MODIFY `id_selec` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id_selec` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT de la tabla `rol`
