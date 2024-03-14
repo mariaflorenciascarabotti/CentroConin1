@@ -11,7 +11,7 @@
         $alert= "";
 
         if(empty($_POST["nombre"]) || empty($_POST["apellido"]) || empty($_POST["email"]) || empty($_POST["usuario"]) || empty($_POST["rol"])){
-            $alert='<p class="msg_error">Todos los ampos son obligatorios</p>';
+            $alert='<p class="msg_error">Todos los campos son obligatorios</p>';
         }else{
     
             $id_usuario = $_POST["id_usuario"];
