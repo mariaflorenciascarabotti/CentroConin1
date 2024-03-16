@@ -4,6 +4,7 @@
     {
         header("location: ../");
     } 
+
 ?>
 
 <header>

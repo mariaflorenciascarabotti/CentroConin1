@@ -326,6 +326,7 @@ $(document).ready(function(){
             $('#unidad_medida').val("");
         }
     }
-    
+
+
 
 });

@@ -1,28 +1,53 @@
 <?php
-session_start();
+
 include "../conexion.php";
 
-// Obtener la fecha actual
-$fecha_actual = date("Y-m-d");
+// Obtener la fecha actual en el formato Y-m-d
+$fechaActual = date("Y-m-d");
 
-echo $fecha_actual;
+// Consulta para obtener todas las fechas de alerta de vencimiento
+$query = mysqli_query($conn, "SELECT `alerta_vencimiento`,`nombre`,`marca`,`lote`,`cantidad` FROM `producto`");
 
-// Consultar los productos cuya fecha de alerta de vencimiento coincida con la fecha actual
-$query = mysqli_query($conn, "SELECT * FROM producto WHERE alerta_vencimiento = '$fecha_actual'");
+// Array para almacenar las fechas coincidentes
+$fechasCoincidentes = array();
 
-// Verificar si hay productos que coincidan con la fecha actual
-if (mysqli_num_rows($query) > 0) {
-    // Envía un correo electrónico a todos los usuarios
-    $subject = "Alerta de vencimiento de productos";
-    $message = "Uno o más productos han alcanzado su fecha de alerta de vencimiento. Por favor, revisa tus productos.";
-    $headers = "From: tu_correo@example.com";
-
-    // Consulta para obtener los correos electrónicos de todos los usuarios
-    $query_usuarios = mysqli_query($conn, "SELECT email FROM usuarios");
-
-    // Envía el correo electrónico a cada usuario
-    while ($usuario = mysqli_fetch_assoc($query_usuarios)) {
-        mail($usuario['email'], $subject, $message, $headers);
+// Verificar si hay resultados en la consulta
+if ($query) {
+    // Recorrer los resultados de la consulta
+    while ($row = mysqli_fetch_assoc($query)) {
+        // Obtener la fecha de alerta de vencimiento de la fila actual
+        $fechaAlerta = $row['alerta_vencimiento'];
+        
+        // Verificar si la fecha de alerta coincide con la fecha actual
+        if ($fechaAlerta == $fechaActual) {
+            // Agregar la fecha coincidente al array
+            $fechasCoincidentes[] = array(
+                'nombre' => $row['nombre'],
+                'marca' => $row['marca'],
+                'lote' => $row['lote'],
+                'cantidad' => $row['cantidad'],
+                'fecha_alerta' => $fechaAlerta
+            );
+        }
     }
+
+    // Cerrar la conexión
+    mysqli_close($conn);
+
+    if (!empty($fechasCoincidentes)) {
+        // Construir el mensaje para mostrar en el alert
+        $mensaje = "Hay productos próximos a vencer:\\n";
+        foreach ($fechasCoincidentes as $fechaCoincidente) {
+            $mensaje .= "Nombre: " . $fechaCoincidente['nombre'] . ", ";
+            $mensaje .= "Marca: " . $fechaCoincidente['marca'] . ", ";
+            $mensaje .= "Lote: " . $fechaCoincidente['lote'] . ", ";
+            $mensaje .= "Cantidad: " . $fechaCoincidente['cantidad'] . "\\n";
+        }
+        echo "<script>alert('$mensaje');</script>";
+    } else {
+       
+    }
+} else {
+    echo "<script>alert('Error al realizar la consulta.');</script>";
 }
 ?>

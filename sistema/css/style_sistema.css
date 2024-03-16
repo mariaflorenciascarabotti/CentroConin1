@@ -345,6 +345,20 @@ table td{
 	
 }
 
+/* Define la animación de parpadeo */
+@keyframes blink {
+    0% { opacity: 1; }
+    50% { opacity: 20%; }
+    100% { opacity: 1; }
+}
+
+/* Aplica la animación a la clase fecha-vencimiento-destacada */
+.fecha-vencimiento-destacada {
+    background-color: red;
+    color: white;
+    animation: blink 1s 5;  /* La animación parpadeará durante 1 segundo y se repetirá infinitamente */
+}
+
 @media print {
 	/* Ocultar para la impresión */
 	.encabezado, .close, .noPrint {

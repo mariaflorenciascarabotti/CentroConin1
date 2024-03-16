@@ -6,22 +6,22 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<meta charset="UTF-8">
-	<?php include "includes/scripts.php"; ?>
-	<title>Lista de Productos</title>
+    <meta charset="UTF-8">
+    <?php include "includes/scripts.php"; ?>
+    <title>Lista de Productos</title>
 </head>
 <body>
 
-	<?php include "includes/header.php"; ?>
+    <?php include "includes/header.php"; ?>
 
-	<section id="container">
-		<h2>Lista de Productos</h2>
+    <section id="container">
+        <h2>Lista de Productos</h2>
         <a href="registroProducto.php" class="btn_new">
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-lg" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2"/>
             </svg> Agregar Producto
         </a>
         
-<!------------ Buscador -->
+        <!------------ Buscador -->
         <form action="buscarProducto.php" method="get" class="form_search">
             <input type="text" name="busqueda" id="busqueda" placeholder="Buscar">
             <button type="submit" class="btn_search">
@@ -45,92 +45,89 @@
                 <th>Acciones</th>
             </tr>
 
-<!----------------------- Paginador -->
-        <?php 
- 
-            $sql_register = mysqli_query($conn,"SELECT COUNT(*) as total_registro FROM producto" );
-            $result_register = mysqli_fetch_array($sql_register);
-            $total_registro = $result_register['total_registro'];
+            <?php 
+                $sql_register = mysqli_query($conn,"SELECT COUNT(*) as total_registro FROM producto" );
+                $result_register = mysqli_fetch_array($sql_register);
+                $total_registro = $result_register['total_registro'];
 
-            $por_pagina = 8;
-            if(empty($_GET['pagina'])){
-                $pagina=1;
-            }else{
-                $pagina = $_GET['pagina'];
-            }
-
-            $desde = ($pagina-1) * $por_pagina;
-            $total_paginas = ceil($total_registro / $por_pagina);
-
-            $query = mysqli_query($conn,"SELECT p.id_prod, p.nombre, p.marca, p.unidad_medida, p.lote, p.fecha_vencimiento, p.cantidad, p.alerta_vencimiento, p.precio, p.observaciones, a.grupo_alimenticio, a.tipo_alimenticio FROM producto p INNER JOIN alimentos a on p.grupo_alimenticio = a.grupo_alimenticio  ORDER BY nombre ASC LIMIT $desde, $por_pagina");
-            mysqli_close($conn);
-            $result = mysqli_num_rows($query);
-
-            if($result > 0){
-                while($data = mysqli_fetch_array($query)){
-        ?>
-                    <tr>
-                        <!-- <td><?php echo $data["id_prod"]; ?></td> --> 
-                        <td><?php echo $data["nombre"]; ?></td> 
-                        <td><?php echo $data["marca"]; ?></td>
-                        <td><?php echo $data["unidad_medida"]; ?></td>
-                        <td><?php echo $data["lote"]; ?></td>
-                        <td><?php echo date('d/m/Y', strtotime($data["fecha_vencimiento"])); ?></td>
-                        <td><?php echo $data["cantidad"]; ?></td>
-                        <td><?php echo date('d/m/Y', strtotime($data["alerta_vencimiento"])); ?></td>
-                        <td>$<?php echo $data["precio"]; ?></td>
-                        <td><?php echo $data["tipo_alimenticio"]; ?></td>
-                        <td><?php echo $data["observaciones"]; ?></td>
-                       
-
-                        <td>
-                            <a class="link_edit" href="editarProducto.php?id=<?php echo $data["id_prod"]; ?>">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16"><path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/><path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5z"/>
-                                </svg> Editar
-                            </a>
-                            |
-                            <a class="link_delete" href="eliminarProducto.php?id=<?php echo $data["id_prod"]; ?>">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash3" viewBox="0 0 16 16"><path d="M6.5 1h3a.5.5 0 0 1 .5.5v1H6v-1a.5.5 0 0 1 .5-.5M11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3A1.5 1.5 0 0 0 5 1.5v1H1.5a.5.5 0 0 0 0 1h.538l.853 10.66A2 2 0 0 0 4.885 16h6.23a2 2 0 0 0 1.994-1.84l.853-10.66h.538a.5.5 0 0 0 0-1zm1.958 1-.846 10.58a1 1 0 0 1-.997.92h-6.23a1 1 0 0 1-.997-.92L3.042 3.5zm-7.487 1a.5.5 0 0 1 .528.47l.5 8.5a.5.5 0 0 1-.998.06L5 5.03a.5.5 0 0 1 .47-.53Zm5.058 0a.5.5 0 0 1 .47.53l-.5 8.5a.5.5 0 1 1-.998-.06l.5-8.5a.5.5 0 0 1 .528-.47M8 4.5a.5.5 0 0 1 .5.5v8.5a.5.5 0 0 1-1 0V5a.5.5 0 0 1 .5-.5"/>
-                                </svg> Eliminar
-                            </a>
-                        </td>
-                    </tr>
-        <?php 
+                $por_pagina = 8;
+                if(empty($_GET['pagina'])){
+                    $pagina=1;
+                }else{
+                    $pagina = $_GET['pagina'];
                 }
-            }
-        ?>
+
+                $desde = ($pagina-1) * $por_pagina;
+                $total_paginas = ceil($total_registro / $por_pagina);
+
+                $query = mysqli_query($conn,"SELECT p.id_prod, p.nombre, p.marca, p.unidad_medida, p.lote, p.fecha_vencimiento, p.cantidad, p.alerta_vencimiento, p.precio, p.observaciones, a.grupo_alimenticio, a.tipo_alimenticio FROM producto p INNER JOIN alimentos a on p.grupo_alimenticio = a.grupo_alimenticio  ORDER BY nombre ASC LIMIT $desde, $por_pagina");
+                mysqli_close($conn);
+                $result = mysqli_num_rows($query);
+
+                if($result > 0){
+                    while($data = mysqli_fetch_array($query)){
+                     
+            ?>
+                        <tr>
+                            <td><?php echo $data["nombre"]; ?></td> 
+                            <td><?php echo $data["marca"]; ?></td>
+                            <td><?php echo $data["unidad_medida"]; ?></td>
+                            <td><?php echo $data["lote"]; ?></td>
+                            <td><?php echo date('d/m/Y', strtotime($data["fecha_vencimiento"])); ?></td>
+                            <td><?php echo $data["cantidad"]; ?></td>
+                            <td <?php if(date('Y-m-d', strtotime($data["alerta_vencimiento"])) == date('Y-m-d')) echo 'class="fecha-vencimiento-destacada"'; ?>>
+                            <?php echo date('d/m/Y', strtotime($data["alerta_vencimiento"])); ?>
+                            </td>
+                            <td>$<?php echo $data["precio"]; ?></td>
+                            <td><?php echo $data["tipo_alimenticio"]; ?></td>
+                            <td><?php echo $data["observaciones"]; ?></td>
+                            <td>
+                                <a class="link_edit" href="editarProducto.php?id=<?php echo $data["id_prod"]; ?>">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16"><path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/><path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5z"/>
+                                    </svg> Editar
+                                </a>
+                                |
+                                <a class="link_delete" href="eliminarProducto.php?id=<?php echo $data["id_prod"]; ?>">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash3" viewBox="0 0 16 16"><path d="M6.5 1h3a.5.5 0 0 1 .5.5v1H6v-1a.5.5 0 0 1 .5-.5M11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3A1.5 1.5 0 0 0 5 1.5v1H1.5a.5.5 0 0 0 0 1h.538l.853 10.66A2 2 0 0 0 4.885 16h6.23a2 2 0 0 0 1.994-1.84l.853-10.66h.538a.5.5 0 0 0 0-1zm1.958 1-.846 10.58a1 1 0 0 1-.997.92h-6.23a1 1 0 0 1-.997-.92L3.042 3.5zm-7.487 1a.5.5 0 0 1 .528.47l.5 8.5a.5.5 0 0 1-.998.06L5 5.03a.5.5 0 0 1 .47-.53Zm5.058 0a.5.5 0 0 1 .47.53l-.5 8.5a.5.5 0 1 1-.998-.06l.5-8.5a.5.5 0 0 1 .528-.47M8 4.5a.5.5 0 0 1 .5.5v8.5a.5.5 0 0 1-1 0V5a.5.5 0 0 1 .5-.5"/>
+                                    </svg> Eliminar
+                                </a>
+                            </td>
+                        </tr>
+            <?php 
+                    }
+                }
+            ?>
 
         </table>
         <div class="paginador">
             <ul>
-
-            <?php 
-                if($pagina != 1){
-            ?>
-                <li><a href="?pagina=<?php echo 1; ?>">|<</a></li>
-                <li><a href="?pagina=<?php echo $pagina-1; ?>"><<</a></li>
-            <?php 
-                }
-                for($i=1; $i <= $total_paginas; $i++){
-                    if($i==$pagina){
-                        echo '<li class="pageSelected">'.$i.'</li>';
-                    }else{
-                        echo '<li><a href="?pagina='.$i.'">'.$i.'</a></li>';
+                <?php 
+                    if($pagina != 1){
+                ?>
+                    <li><a href="?pagina=<?php echo 1; ?>">|<</a></li>
+                    <li><a href="?pagina=<?php echo $pagina-1; ?>"><<</a></li>
+                <?php 
                     }
-                }
-                if($pagina != $total_paginas){
-            ?>
-                <li><a href="?pagina=<?php echo $pagina + 1; ?>">>></a></li>
-                <li><a href="?pagina=<?php echo $total_paginas; ?>">>|</a></li>
-            <?php 
-                } 
-            ?>
+                    for($i=1; $i <= $total_paginas; $i++){
+                        if($i==$pagina){
+                            echo '<li class="pageSelected">'.$i.'</li>';
+                        }else{
+                            echo '<li><a href="?pagina='.$i.'">'.$i.'</a></li>';
+                        }
+                    }
+                    if($pagina != $total_paginas){
+                ?>
+                    <li><a href="?pagina=<?php echo $pagina + 1; ?>">>></a></li>
+                    <li><a href="?pagina=<?php echo $total_paginas; ?>">>|</a></li>
+                <?php 
+                    } 
+                ?>
             </ul>
         </div>        
         
-	</section>
+    </section>
 
-	<?php include "includes/footer.php"; ?>
-
+    <?php include "includes/footer.php"; ?>
+    
 </body>
 </html>

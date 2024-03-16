@@ -11,7 +11,7 @@
 <body>
 
 	<?php include "includes/header.php"; ?>
-
+	
 	<section id="container">
 		
 		<h2 class="prueba">Bienvenido al sistema</h2>
@@ -29,7 +29,8 @@
 		
 	</section>
 
-	<?php include "includes/footer.php"; ?>
+	<?php include "includes/footer.php";
+	include "verificar_vencimientos.php"; ?>
 
 </body>
 </html>
